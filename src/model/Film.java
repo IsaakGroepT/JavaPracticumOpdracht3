@@ -2,59 +2,26 @@ package model;
 
 import java.util.UUID;
 
-public class Film implements Item {
+public class Film extends Item {
 	
-	final int id;
 	final double prijs = 3;
-	final String titel;
-	boolean uitgeleend = false;
 	
-	/**
-	 * Constructor
-	 */
 	public Film(String titel)
 	{
-		id = UUID.randomUUID();
-		this.titel = titel;
+		super(titel);
 	}
-
-	/**
-	 * 
-	 */
-	public int getId()
+	
+	public Film(String titel, UUID id)
 	{
-		return id;
+		super(titel, id);
 	}
-
+	
 	/**
-	 * 
+	 * Toevoeging van de prijs aan de originele toString() methode
 	 */
-	public String getTitel()
+	@Override
+	public String toString()
 	{
-		return titel;
-	}
-
-	/**
-	 * 
-	 */
-	public boolean getUitgeleend()
-	{
-		return uitgeleend;
-	}
-
-	/**
-	 * 
-	 */
-	public void setUitgeleend(boolean isUitgeleend)
-	{
-		uitgeleend = isUitgeleend;
-	}
-
-	/**
-	 * 
-	 */
-	public double getPrijs()
-	{
-		return prijs;
+		return super.toString() + ";" + prijs;
 	}
 }
