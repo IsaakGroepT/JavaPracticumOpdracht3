@@ -47,7 +47,7 @@ public abstract class Item {
 		return titel;
 	}
 	
-	public boolean getUitgeleend()
+	public boolean isUitgeleend()
 	{
 		return uitgeleend;
 	}
@@ -57,8 +57,16 @@ public abstract class Item {
 		uitgeleend = isUitgeleend;
 	}
 	
-	//TODO: wordt de prijs juist weergegeven op deze manier of moet deze methode in de subklasse komen
-	public double getPrijs()
+	/**
+	 * Geeft de prijs voor het item terug. Deze methode wordt aangepast in de subklasse als er een 
+	 * specifieke prijsberekening voor nodig is.
+	 * 
+	 * @see Film
+	 * @param aantalDagen
+	 * @return
+	 */
+	//TODO: wordt de prijs juist weergegeven op deze manier of moet deze methode in de subklasse overridden worden
+	public double getPrijs(int aantalDagen)
 	{
 		return prijs;
 	}

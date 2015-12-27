@@ -4,7 +4,9 @@ import java.util.UUID;
 
 public class Film extends Item {
 	
-	final double prijs = 3;
+	final double prijs = 5;
+	final int dagenBasisprijsGeldig = 3;
+	final double prijsPerDagNaInbegrepenDagen = 2;
 	
 	public Film(String titel)
 	{
@@ -14,6 +16,23 @@ public class Film extends Item {
 	public Film(String titel, UUID id)
 	{
 		super(titel, id);
+	}
+	
+	/**
+	 * Aangepaste getPrijs() methode voor deze subklasse
+	 */
+	@Override
+	public double getPrijs(int aantalDagen)
+	{
+		double prijs = this.prijs;
+		
+		int dagenOver = aantalDagen - dagenBasisprijsGeldig;
+		
+		if (dagenOver > 0) {
+			prijs += dagenOver * prijsPerDagNaInbegrepenDagen;
+		}
+		
+		return prijs;
 	}
 	
 	/**
