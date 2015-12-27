@@ -1,21 +1,75 @@
 package model;
 
-public interface Item {
+import java.util.UUID;
 
-	int id = 0;
-	String titel = "";
+public abstract class Item {
+
+	UUID id;
+	String titel;
 	boolean uitgeleend = false;
-	double prijs = 0;
+	double prijs;
 	
-	public int getId();
-	public void setId();
+	/**
+	 * Expliciete default constructor die enkel bestaat om een compile error te voorkomen,
+	 * mag dus niet gebruikt worden
+	 */
+	public Item()
+	{
+		throw new UnsupportedOperationException("De Item object moet geinstantieerd worden met een titel parameter");
+	}
 	
-	public String getTitel();
-	public void setTitel();
+	/**
+	 * Constructor met titel paramater
+	 */
+	public Item(String titel)
+	{
+		id = UUID.randomUUID();
+		this.titel = titel;
+	}
 	
-	public boolean getUitgeleend();
-	public void setUitgeleend();
+	/**
+	 * Constructor die wordt gebruikt om gelezen items uit het bestand terug te creëren als objecten
+	 */
+	public Item(String titel, UUID id)
+	{
+		this.id = id;
+		this.titel = titel;
+		uitgeleend = true;
+	}
 	
-	public double getPrijs();
-	public void setPrijs();
+	public UUID getId()
+	{
+		return id;
+	}
+	
+	public String getTitel()
+	{
+		return titel;
+	}
+	
+	public boolean getUitgeleend()
+	{
+		return uitgeleend;
+	}
+
+	public void setUitgeleend(boolean isUitgeleend)
+	{
+		uitgeleend = isUitgeleend;
+	}
+	
+	//TODO: wordt de prijs juist weergegeven op deze manier of moet deze methode in de subklasse komen
+	public double getPrijs()
+	{
+		return prijs;
+	}
+	
+	/**
+	 * Converteer data naar een string dat we later in het tekstbestand kunnen opslaan
+	 */
+	@Override
+	public String toString()
+	{
+		//TODO: geeft getClass() juiste subklasse naam door?
+		return getClass().getName() + ";" + id + ";" + titel;
+	}
 }
