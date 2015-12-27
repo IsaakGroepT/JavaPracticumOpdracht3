@@ -1,30 +1,38 @@
 package db;
 
-public static class Uitleenlijst {
+import java.util.List;
+import model.Item;
 
-	List<Item> items;
+public class Uitleenlijst {
+
+	static List<Item> items;
 	
 	/**
 	 * 
 	 */
-	public Uitleenlijst()
-	{
-		items = new List<Item>();
-	}
-	
-	/**
-	 * 
-	 */
-	public List<Item> getItems()
+	public static List<Item> getItems()
 	{
 		return items;
 	}
 	
 	/**
+	 * Haal de item uit de lijst
 	 * 
+	 * @param idx
+	 * @return
 	 */
-	public Item getItem(idx)
+	public static Item getItem(int idx)
 	{
 		return items.get(idx);
+	}
+	
+	/**
+	 * Voeg eentje toe aan de lijst
+	 * 
+	 * @param item
+	 */
+	public static void addItem(Item item)
+	{
+		items.add(item);
 	}
 }
