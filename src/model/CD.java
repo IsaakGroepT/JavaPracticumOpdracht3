@@ -1,69 +1,60 @@
 package model;
 
+import java.util.UUID;
+
 public class CD implements Item {
 	
 	final int id;
-	final double prijs = 5;
+	final double prijs = 1.5;
 	final String titel;
 	boolean uitgeleend = false;
 	
 	/**
-	 * Constructor:
+	 * Constructor
 	 */
 	public CD(String titel)
 	{
-		id = 1;
+		id = UUID.randomUUID();
 		this.titel = titel;
 	}
 
-	@Override
+	/**
+	 * 
+	 */
 	public int getId()
 	{
-		// TODO Auto-generated method stub
-		return 0;
+		return id;
 	}
 
-	@Override
-	public void setId()
-	{
-		// TODO Auto-generated method stub
-		
-	}
-
+	/**
+	 * 
+	 */
 	public String getTitel()
 	{
 		return titel;
 	}
 
-	@Override
-	public void setTitel()
-	{
-		// TODO Auto-generated method stub
-		
-	}
-
+	/**
+	 * 
+	 */
 	public boolean getUitgeleend()
 	{
 		return uitgeleend;
 	}
 
-	@Override
-	public void setUitgeleend()
+	/**
+	 * 
+	 */
+	public void setUitgeleend(boolean isUitgeleend)
 	{
-		// TODO Auto-generated method stub
-		
+		uitgeleend = isUitgeleend;
 	}
 
+	/**
+	 * 
+	 */
 	public double getPrijs()
 	{
 		return prijs;
 	}
-
-	@Override
-	public void setPrijs()
-	{
-		// TODO Auto-generated method stub
-		
-	}
-
 }

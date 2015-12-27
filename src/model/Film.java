@@ -1,61 +1,60 @@
 package model;
 
-public class Film implements Item {
+import java.util.UUID;
 
-	@Override
+public class Film implements Item {
+	
+	final int id;
+	final double prijs = 3;
+	final String titel;
+	boolean uitgeleend = false;
+	
+	/**
+	 * Constructor
+	 */
+	public Film(String titel)
+	{
+		id = UUID.randomUUID();
+		this.titel = titel;
+	}
+
+	/**
+	 * 
+	 */
 	public int getId()
 	{
-		// TODO Auto-generated method stub
-		return 0;
+		return id;
 	}
 
-	@Override
-	public void setId()
-	{
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
+	/**
+	 * 
+	 */
 	public String getTitel()
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return titel;
 	}
 
-	@Override
-	public void setTitel()
-	{
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
+	/**
+	 * 
+	 */
 	public boolean getUitgeleend()
 	{
-		// TODO Auto-generated method stub
-		return false;
+		return uitgeleend;
 	}
 
-	@Override
-	public void setUitgeleend()
+	/**
+	 * 
+	 */
+	public void setUitgeleend(boolean isUitgeleend)
 	{
-		// TODO Auto-generated method stub
-		
+		uitgeleend = isUitgeleend;
 	}
 
-	@Override
+	/**
+	 * 
+	 */
 	public double getPrijs()
 	{
-		// TODO Auto-generated method stub
-		return 0;
+		return prijs;
 	}
-
-	@Override
-	public void setPrijs()
-	{
-		// TODO Auto-generated method stub
-		
-	}
-
 }
