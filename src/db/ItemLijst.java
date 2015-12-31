@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 
 import model.Item;
 
-public class ItemLijst implements Comparable<Item> {
+public class ItemLijst {
 
 	static List<Item> items = new ArrayList<Item>();
 	
@@ -62,22 +62,5 @@ public class ItemLijst implements Comparable<Item> {
 	public static void addItem(Item item)
 	{
 		items.add(item);
-	}
-	
-	/**
-	 * Dit is een aangepaste vergelijker om voor correcte sortering van de itemlijst variabele te zorgen
-	 */
-	public static Comparator<Item> ItemVergelijker = new Comparator<Item>()
-	{
-		public int compare(Item arg0, Item arg1)
-		{
-			return arg0.getTitel().compareTo(arg1.getTitel());
-		}
-	};
-
-	@Override
-	public int compareTo(Item arg0)
-	{
-		return getClass().getSimpleName().compareTo(arg0.getClass().getSimpleName());
 	}
 }
