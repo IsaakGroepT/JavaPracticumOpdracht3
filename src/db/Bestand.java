@@ -21,8 +21,8 @@ public class Bestand {
 		try {
 			PrintWriter OpslaanInBestand = new PrintWriter("items.txt");
 
-			for (int n = 0; n < Uitleenlijst.getItems().size(); n++) {
-				OpslaanInBestand.println(Uitleenlijst.getItem(n));
+			for (int n = 0; n < ItemLijst.getItems().size(); n++) {
+				OpslaanInBestand.println(ItemLijst.getItem(n));
 			}
 			OpslaanInBestand.close();
 		} catch (IOException e) {
@@ -69,7 +69,7 @@ public class Bestand {
 				else {
 					throw new Exception("Dit type item is niet bestaande");
 				}
-				Uitleenlijst.addItem(item);
+				ItemLijst.addItem(item);
 			}
 
 			if (scanner != null) {
