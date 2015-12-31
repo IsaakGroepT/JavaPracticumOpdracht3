@@ -7,6 +7,7 @@ public abstract class Item {
 	UUID id;
 	String titel;
 	boolean uitgeleend = false;
+	// probleem:  wordt niet getoondt in stream
 	double prijs;
 	
 	/**
@@ -78,6 +79,6 @@ public abstract class Item {
 	public String toString()
 	{
 		//TODO: geeft getClass() juiste subklasse naam door?
-		return getClass().getName() + ";" + id + ";" + titel;
+		return getClass().getSimpleName() + ";" + id + ";" + titel + ";uitgeleend: " + (uitgeleend ? "ja" : "nee");
 	}
 }
