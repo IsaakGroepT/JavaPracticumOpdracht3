@@ -2,13 +2,15 @@ package model;
 
 import java.util.UUID;
 
+import db.ItemLijst;
+
 public abstract class Item {
 
-	UUID id;
-	String titel;
-	boolean uitgeleend = false;
-	// probleem:  wordt niet getoondt in stream
-	double prijs;
+	private UUID id;
+	private String titel;
+	private boolean uitgeleend = false;
+	// Prijs wordt in de subklasse gespecifieerd
+	private double prijs;
 	
 	/**
 	 * Expliciete default constructor die enkel bestaat om een compile error te voorkomen,
@@ -26,6 +28,8 @@ public abstract class Item {
 	{
 		id = UUID.randomUUID();
 		this.titel = titel;
+		
+		ItemLijst.itemToevoegen(this);
 	}
 	
 	/**
@@ -36,9 +40,11 @@ public abstract class Item {
 		this.id = id;
 		this.titel = titel;
 		uitgeleend = true;
+		
+		ItemLijst.itemToevoegen(this);
 	}
 	
-	public UUID getId()
+	public UUID getID()
 	{
 		return id;
 	}
@@ -59,26 +65,32 @@ public abstract class Item {
 	}
 	
 	/**
-	 * Geeft de prijs voor het item terug. Deze methode wordt aangepast in de subklasse als er een 
-	 * specifieke prijsberekening voor nodig is.
-	 * 
-	 * @see Film
-	 * @param aantalDagen
-	 * @return
-	 */
-	//TODO: wordt de prijs juist weergegeven op deze manier of moet deze methode in de subklasse overridden worden
-	public double getPrijs(int aantalDagen)
-	{
-		return prijs;
-	}
-	
-	/**
 	 * Converteer data naar een string dat we later in het tekstbestand kunnen opslaan
 	 */
 	@Override
 	public String toString()
 	{
-		//TODO: geeft getClass() juiste subklasse naam door?
 		return getClass().getSimpleName() + ";" + id + ";" + titel + ";uitgeleend: " + (uitgeleend ? "ja" : "nee");
 	}
+	
+	/**
+	 * Sommige items hebben een minimumperiode voor de prijs die ze betalen
+	 */
+	public abstract int getMinimumLeenPeriode();
+	
+	/**
+	 * Geeft de prijs terug bij het te laat terugbrengen
+	 * 
+	 * @return
+	 */
+	public abstract double getPrijs();
+
+	/**
+	 * Deze moet geimplementeerd worden in de subklasse om de prijs juist te weergeven voor dat
+	 * specifieke item en het aantal dagen
+	 * 
+	 * @param dagen
+	 * @return
+	 */
+	public abstract double getPrijs(int dagen);
 }
