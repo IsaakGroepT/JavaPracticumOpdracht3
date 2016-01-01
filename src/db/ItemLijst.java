@@ -1,12 +1,12 @@
 package db;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 import java.util.stream.Collectors;
-
 import model.Item;
+import model.ItemTypes;
 
 public class ItemLijst {
 
@@ -44,14 +44,40 @@ public class ItemLijst {
 	}
 	
 	/**
-	 * Haal de item uit de lijst
+	 * Zoeken op basis van de gegeven string en eventueel gelimiteerd tot de gegeven type
+	 * 
+	 * @param zoekwoord
+	 * @param type
+	 * @return
+	 */
+	public static List<Item> zoekItemsOpDeelString(String zoekwoord, ItemTypes type)
+	{
+		return items.stream()
+						.filter(i -> i.getTitel().toLowerCase().contains(zoekwoord.toLowerCase()) 
+						&& (type == ItemTypes.TYPE_ALL ? true : i.getClass().getSimpleName().equals(type.getType())))
+						.collect(Collectors.toList());
+	}
+	
+	/**
+	 * Haal de item uit de lijst obv index nummer
 	 * 
 	 * @param idx
 	 * @return
 	 */
-	public static Item getItem(int idx)
+	public static Item getItemObvIdx(int idx)
 	{
 		return items.get(idx);
+	}
+	
+	/**
+	 * Haal de Item op obv id, null als niet bestaande
+	 * 
+	 * @param id
+	 * @return Item|null
+	 */
+	public static Item getItemObvID(UUID id)
+	{
+		return items.stream().filter(i -> i.getID() == id).findFirst().get();
 	}
 	
 	/**
@@ -59,7 +85,7 @@ public class ItemLijst {
 	 * 
 	 * @param item
 	 */
-	public static void addItem(Item item)
+	public static void itemToevoegen(Item item)
 	{
 		items.add(item);
 	}
