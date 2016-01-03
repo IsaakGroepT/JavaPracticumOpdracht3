@@ -1,5 +1,6 @@
 package controller;
 
+import db.ItemOpslag;
 import db.ItemLijst;
 import db.Klant;
 import db.Uitleningen;
@@ -9,37 +10,38 @@ import model.Film;
 import model.Item;
 import model.ItemTypes;
 import model.Spel;
+import view.Main;
 
 public class Winkel {
 	
-	static Klant klant1;
-	static Klant klant2;
-	static CD cd1;
-	static CD cd2;
-	static CD cd3;
-	static Film film1;
-	static Film film2;
-	static Film film3;
-	static Spel spel1;
-	static Spel spel2;
-	static Spel spel3;
+	private static Klant klant1;
+	private static Klant klant2;
 	
 	
 	public static void main(String[] args)
-	{
+	{	
 		/* 
 		 * Eerst items aanmaken zonder deze al per type te groeperen om later de sort functie te
 		 * controleren
 		 */
-		cd1 = new CD("Metallica");
-		film1 = new Film("Scary movie");
-		spel1 = new Spel("Gtz");
-		cd2 = new CD("Petallica2");
-		cd3 = new CD("Netallica3");
-		film2 = new Film("Scary movie2");
-		film3 = new Film("Xcary movie3");
-		spel2 = new Spel("gta2");
-		spel3 = new Spel("Bta3");
+		// Hebben we al opgeslagen gegevens?
+		ItemOpslag.lezen();
+		
+		// Zoiet, aanmaken!
+		if (ItemLijst.getItems().isEmpty()) {
+			new CD("Metallica");
+			new Film("Scary movie");
+			new Spel("Gtz");
+			new CD("Petallica2");
+			new CD("Netallica3");
+			new Film("Scary movie2");
+			new Film("Xcary movie3");
+			new Spel("gta2");
+			new Spel("Bta3");
+		} else {
+			// Debugging man
+			//ItemLijst.getItems().stream().forEach(item -> System.out.println(item));
+		}
 		
 		Adres adres1 = new Adres();
 		Adres adres2 = new Adres();
@@ -67,7 +69,13 @@ public class Winkel {
 		//voorbeeldZoekenOpKernwoord();
 		
 		// Test 3
-		voorbeeldUitlening();
+		//voorbeeldUitlening();
+		
+		// Start de JavaFX GUI
+		Main.launch(Main.class, args);
+		
+		// 't Is gedaan!
+		programmaExit();
 	}
 	
 	/**
@@ -83,7 +91,7 @@ public class Winkel {
 	 */
 	private static void voorbeeldZoekenOpKernwoord()
 	{
-		for (Item item : ItemLijst.zoekItemsOpDeelString("alli", ItemTypes.TYPE_ALL)) {
+		for (Item item : ItemLijst.zoekItemsOpDeelString("alli", null)) {
 			System.out.println(item);
 		}
 	}
@@ -93,7 +101,28 @@ public class Winkel {
 	 */
 	private static void voorbeeldUitlening()
 	{
+		Film film1 = (Film) ItemLijst.getItemObvIdx(1);
+		CD cd1 = (CD) ItemLijst.getItemObvIdx(0);
+		
 		System.out.println(Uitleningen.nieuweUitlening(klant1.getID(), film1.getID(), 4));
+		// cd1
 		System.out.println(Uitleningen.nieuweUitlening(klant2.getID(), cd1.getID(), 3));
+		
+		double boete = Uitleningen.uitleningStoppen(film1.getID());
+		
+		if (boete > 0) {
+			System.out.println("Het is te laat binnengebracht! Boete: " + boete + " euro");
+		}
+		else {
+			System.out.println("Er is geen boete want was op tijd terug");
+		}
+	}
+	
+	/**
+	 * Taken die moeten uitgevoerd worden op het einde
+	 */
+	private static void programmaExit()
+	{
+		ItemOpslag.opslaan();
 	}
 }
