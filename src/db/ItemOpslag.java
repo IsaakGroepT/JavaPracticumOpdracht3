@@ -3,6 +3,7 @@ package db;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.lang.reflect.Constructor;
 import java.util.Scanner;
 import java.util.UUID;
 
@@ -11,18 +12,22 @@ import model.Film;
 import model.Item;
 import model.Spel;
 
-public class Bestand {
+/**
+ * De klasse die voor de opslag van de items in een bestand zorgt
+ */
+@SuppressWarnings("unused")
+public class ItemOpslag {
 
 	/**
 	 * 
 	 */
-	public void opslaan()
+	public static void opslaan()
 	{
 		try {
 			PrintWriter OpslaanInBestand = new PrintWriter("items.txt");
 
 			for (int n = 0; n < ItemLijst.getItems().size(); n++) {
-				OpslaanInBestand.println(ItemLijst.getItem(n));
+				OpslaanInBestand.println(ItemLijst.getItemObvIdx(n));
 			}
 			OpslaanInBestand.close();
 		} catch (IOException e) {
@@ -33,7 +38,7 @@ public class Bestand {
 	/**
 	 * 
 	 */
-	public void lezen()
+	public static void lezen()
 	{
 		File file = new File("items.txt");
 		Scanner scanner = null;
@@ -45,6 +50,7 @@ public class Bestand {
 		try {
 			scanner = new Scanner(file);
 			Item item;
+			String[] itemData;
 
 			while (scanner.hasNext()) {
 				String lijn = scanner.nextLine();
@@ -54,29 +60,24 @@ public class Bestand {
 					break;
 				}
 
-				String[] itemData = lijn.split(";");
+				itemData = lijn.split(";");
 				
 				//TODO: veranderen naar factory DP?
-				if (itemData[0] == "CD") {
-					item = new CD(itemData[2], UUID.fromString(itemData[1]));
+				switch(itemData[0]) {
+					case "CD":
+					case "Film":
+					case "Spel":
+						Class<?> klasse = Class.forName("model." + itemData[0]);
+						Constructor<?> cons = klasse.getConstructor(String.class, UUID.class);
+						Object itemObject = cons.newInstance(itemData[2], UUID.fromString(itemData[1]));
+						//System.out.println(itemObject.toString());
+						break;
+					default:
+						throw new Exception("Dit type item is niet bestaande: '" + itemData[0] + "'");
 				}
-				else if (itemData[0] == "Film") {
-					item = new Film(itemData[2], UUID.fromString(itemData[1]));
-				}
-				else if (itemData[0] == "Spel") {
-					item = new Spel(itemData[2], UUID.fromString(itemData[1]));
-				}
-				else {
-					throw new Exception("Dit type item is niet bestaande");
-				}
-				ItemLijst.addItem(item);
-			}
-
-			if (scanner != null) {
-				scanner.close();
 			}
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			System.out.println(e.toString());
 		} finally {
 			scanner.close();
 		}
