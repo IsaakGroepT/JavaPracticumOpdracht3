@@ -46,9 +46,9 @@ public class Spel extends Item {
 		return super.toString() + ";" + prijs;
 	}
 
-	@Override
+	/*@Override
 	public int getMinimumLeenPeriode()
 	{
 		return 1;
-	}
+	}*/
 }

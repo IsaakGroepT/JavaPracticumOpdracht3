@@ -26,10 +26,10 @@ public class Film extends Item {
 	 * 
 	 * @return
 	 */
-	public int getMinimumLeenPeriode()
-	{
-		return dagenBasisprijsGeldig;
-	}
+//	public int getMinimumLeenPeriode()
+//	{
+//		return dagenBasisprijsGeldig;
+//	}
 	
 	/**
 	 * Geeft gewoon de prijs terug. In dit geval (item is een film) wordt de prijs per dag

@@ -11,6 +11,7 @@ public abstract class Item {
 	private boolean uitgeleend = false;
 	// Prijs wordt in de subklasse gespecifieerd
 	private double prijs;
+	private double boete = 3;
 	
 	/**
 	 * Expliciete default constructor die enkel bestaat om een compile error te voorkomen,
@@ -73,10 +74,15 @@ public abstract class Item {
 		return getClass().getSimpleName() + ";" + id + ";" + titel + ";uitgeleend: " + (uitgeleend ? "ja" : "nee");
 	}
 	
+	public double getBoete()
+	{
+		return boete;
+	}
+	
 	/**
 	 * Sommige items hebben een minimumperiode voor de prijs die ze betalen
 	 */
-	public abstract int getMinimumLeenPeriode();
+	//public abstract int getMinimumLeenPeriode();
 	
 	/**
 	 * Geeft de prijs terug bij het te laat terugbrengen
