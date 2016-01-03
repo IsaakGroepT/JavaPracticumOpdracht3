@@ -23,7 +23,7 @@ public class Uitleningen {
 		try {
 			uitleningen.add(new Uitlening(klant, item, dagen));
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			System.out.println(e.toString());
 			//e.printStackTrace();
 		}
 		
@@ -36,8 +36,10 @@ public class Uitleningen {
 	 * 
 	 * @param item
 	 */
-	public static double binnenBrengenEnBerekenBoete(UUID item)
+	public static double uitleningStoppen(UUID item)
 	{
+		double kost;
+		
 		try {
 			Item itemObject = ItemLijst.getItemObvID(item);
 			Uitlening uitlening = uitleningen.stream()
@@ -45,20 +47,26 @@ public class Uitleningen {
 														.findFirst()
 														.get();
 			if (uitlening.isTeLaat()) {
-				// Film heeft een minimum uitleenperiode die inbegrepen is in de prijs
+				/*// Film heeft een minimum uitleenperiode die inbegrepen is in de prijs
 				if (itemObject instanceof Film) {
 					if (uitlening.getAantalDagen() > itemObject.getMinimumLeenPeriode()) {
-						return itemObject.getPrijs() * uitlening.getAantalDagenTeLaat();
+						kost = itemObject.getPrijs() * uitlening.getAantalDagenTeLaat();
 					}
 				}
 				else {
-					return itemObject.getPrijs() * uitlening.getAantalDagenTeLaat();
-				}
+					kost = itemObject.getPrijs() * uitlening.getAantalDagenTeLaat();
+				}*/
+				kost = itemObject.getBoete() * uitlening.getAantalDagenTeLaat();
+				
+				uitleningen.remove(uitlening);
+				
+				return kost;
 			}
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			System.out.println(e.toString());
 			//e.printStackTrace();
 		}
+		// Was niet te laat binnengebracht
 		return 0;
 	}
 }
