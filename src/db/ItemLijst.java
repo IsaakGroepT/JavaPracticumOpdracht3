@@ -54,7 +54,7 @@ public class ItemLijst {
 	{
 		return items.stream()
 						.filter(i -> i.getTitel().toLowerCase().contains(zoekwoord.toLowerCase()) 
-						&& (type == ItemTypes.TYPE_ALL ? true : i.getClass().getSimpleName().equals(type.getType())))
+						&& (type == null ? true : i.getClass().getSimpleName().toLowerCase().equals(type.toString().toLowerCase())))
 						.collect(Collectors.toList());
 	}
 	
