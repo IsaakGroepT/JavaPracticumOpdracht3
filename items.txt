@@ -1,0 +1,9 @@
+CD;ea9f1c30-c427-4ae8-b826-56307b633fff;Metallica;uitgeleend: ja;1.5
+Film;a6f9a980-c22b-44dd-8035-960fc9077118;Scary movie;uitgeleend: ja;5.0
+Spel;2e71e494-dd83-406c-8d5e-5d6e23e151dc;Gtz;uitgeleend: ja;3.0
+CD;ee29008f-632c-44a9-a45d-ab81d6ab3aa7;Petallica2;uitgeleend: ja;1.5
+CD;9487e1ee-7e87-4b25-ad5f-30b377dd1d61;Netallica3;uitgeleend: ja;1.5
+Film;93192e30-c4b6-4aba-9e32-528d44fba5d1;Scary movie2;uitgeleend: ja;5.0
+Film;e1dcc9aa-5fe6-4622-8a5a-fe1a7907d8b2;Xcary movie3;uitgeleend: ja;5.0
+Spel;13d3498d-991e-408c-bcfe-5de8df0d4e2c;gta2;uitgeleend: ja;3.0
+Spel;6138f985-1de6-4733-86c7-7747ae135df7;Bta3;uitgeleend: ja;3.0
