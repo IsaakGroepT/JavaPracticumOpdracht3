@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+ prefHeight="404.0" prefWidth="708.0" xmlns="http://javafx.com/javafx/8.0.40"
+  xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.HoofdSchermController">
+   <children>
+      <TabPane prefHeight="404.0" prefWidth="708.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Items">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="373.0" prefWidth="598.0">
+                     <children>
+                        <Button fx:id="btnToevoegen" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="Toevoegen" />
+                        <Button fx:id="btnVerwijderen" layoutX="14.0" layoutY="53.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="Verwijderen" />
+                        <TableView fx:id="tblItems" layoutX="132.0" layoutY="14.0" prefHeight="329.0" prefWidth="564.0">
+                          <columns>
+                            <TableColumn prefWidth="113.0" text="ID" />
+                            <TableColumn minWidth="3.0" prefWidth="92.0" text="Type" />
+                              <TableColumn prefWidth="211.0" text="Titel" />
+                              <TableColumn prefWidth="147.0" text="Uitgeleend tot" />
+                          </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Klanten">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="Toevoegen" />
+                        <Button layoutX="14.0" layoutY="53.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="Verwijderen" />
+                        <TableView layoutX="132.0" layoutY="14.0" prefHeight="329.0" prefWidth="564.0">
+                           <columns>
+                              <TableColumn prefWidth="65.0" text="ID" />
+                              <TableColumn minWidth="3.0" prefWidth="93.0" text="Voornaam" />
+                              <TableColumn prefWidth="100.0" text="Achternaam" />
+                              <TableColumn prefWidth="83.0" text="Straat" />
+                              <TableColumn maxWidth="59.0" minWidth="-1.0" prefWidth="43.0" text="Nr" />
+                              <TableColumn prefWidth="69.0" text="Postcode" />
+                              <TableColumn prefWidth="110.0" text="Gemeente" />
+                           </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+            <Tab text="Uitleningen">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="Toevoegen" />
+                        <Button layoutX="14.0" layoutY="53.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="Verwijderen" />
+                        <TableView layoutX="132.0" layoutY="14.0" prefHeight="329.0" prefWidth="564.0">
+                           <columns>
+                              <TableColumn prefWidth="198.0" text="Klant ID" />
+                              <TableColumn minWidth="3.0" prefWidth="174.0" text="Item ID" />
+                              <TableColumn prefWidth="83.0" text="Aantal dagen" />
+                              <TableColumn prefWidth="108.0" text="Uitgeleend tot" />
+                           </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</HBox>
