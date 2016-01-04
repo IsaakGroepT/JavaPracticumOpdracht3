@@ -67,6 +67,7 @@ public class ItemOpslag {
 					case "CD":
 					case "Film":
 					case "Spel":
+						//TODO: Enkel items moeten worden opgeslagen, zonder uitleendetails
 						Class<?> klasse = Class.forName("model." + itemData[0]);
 						Constructor<?> cons = klasse.getConstructor(String.class, UUID.class);
 						Object itemObject = cons.newInstance(itemData[2], UUID.fromString(itemData[1]));

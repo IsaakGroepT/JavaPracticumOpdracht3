@@ -43,24 +43,27 @@ public class Winkel {
 			//ItemLijst.getItems().stream().forEach(item -> System.out.println(item));
 		}
 		
+		// Uitgeleend test
+		ItemLijst.getItems().get(0).setUitgeleend(true);
+		
 		Adres adres1 = new Adres();
 		Adres adres2 = new Adres();
 		
-		adres1.setStreet("polstraat");
-		adres1.setNumber(15);
-		adres1.setPostcode(1000);
-		adres1.setCity("Bxl");
+		adres1.setStraat("pilstraat");
+		adres1.setNummer(115);
+		adres1.setPostcode(3000);
+		adres1.setGemeente("Bxl");
 		adres1.setEmail("joske@mail.com");
 		
-		adres2.setStreet("polstraat");
-		adres2.setNumber(15);
+		adres2.setStraat("polstraat");
+		adres2.setNummer(15);
 		adres2.setPostcode(1000);
-		adres2.setCity("Bxl");
+		adres2.setGemeente("Bxl");
 		adres2.setEmail("dencoolepatte@mail.com");
 		
 		// Klanten
-		klant1 = new Klant("Joske V.", adres1);
-		klant2 = new Klant("Patrick J.", adres2);
+		klant1 = new Klant("Joske", "Vermeulen", adres1);
+		klant2 = new Klant("Patrick", "Pol", adres2);
 				
 		// Test 1
 		//voorbeeldGeformateerdeItems();

@@ -1,9 +1,16 @@
 CD;ea9f1c30-c427-4ae8-b826-56307b633fff;Metallica;uitgeleend: ja;1.5
-Film;a6f9a980-c22b-44dd-8035-960fc9077118;Scary movie;uitgeleend: ja;5.0
-Spel;2e71e494-dd83-406c-8d5e-5d6e23e151dc;Gtz;uitgeleend: ja;3.0
-CD;ee29008f-632c-44a9-a45d-ab81d6ab3aa7;Petallica2;uitgeleend: ja;1.5
-CD;9487e1ee-7e87-4b25-ad5f-30b377dd1d61;Netallica3;uitgeleend: ja;1.5
-Film;93192e30-c4b6-4aba-9e32-528d44fba5d1;Scary movie2;uitgeleend: ja;5.0
-Film;e1dcc9aa-5fe6-4622-8a5a-fe1a7907d8b2;Xcary movie3;uitgeleend: ja;5.0
-Spel;13d3498d-991e-408c-bcfe-5de8df0d4e2c;gta2;uitgeleend: ja;3.0
-Spel;6138f985-1de6-4733-86c7-7747ae135df7;Bta3;uitgeleend: ja;3.0
+Film;a6f9a980-c22b-44dd-8035-960fc9077118;Scary movie;uitgeleend: nee;5.0
+Spel;2e71e494-dd83-406c-8d5e-5d6e23e151dc;Gtz;uitgeleend: nee;3.0
+CD;ee29008f-632c-44a9-a45d-ab81d6ab3aa7;Petallica2;uitgeleend: nee;1.5
+CD;9487e1ee-7e87-4b25-ad5f-30b377dd1d61;Netallica3;uitgeleend: nee;1.5
+Film;93192e30-c4b6-4aba-9e32-528d44fba5d1;Scary movie2;uitgeleend: nee;5.0
+Film;e1dcc9aa-5fe6-4622-8a5a-fe1a7907d8b2;Xcary movie3;uitgeleend: nee;5.0
+Spel;13d3498d-991e-408c-bcfe-5de8df0d4e2c;gta2;uitgeleend: nee;3.0
+Spel;6138f985-1de6-4733-86c7-7747ae135df7;Bta3;uitgeleend: nee;3.0
+CD;6e603ec5-86fc-4b72-8766-ec145eeaffb6;Wintersun;uitgeleend: nee;1.5
+Film;380dbd69-31fe-4b87-a3ae-5d62ba10abeb;Hachiko;uitgeleend: nee;5.0
+CD;9866d8bc-45fb-4478-9fa4-d43393e463ba;muuuse;uitgeleend: nee;1.5
+CD;70a9fe7a-ad80-427a-bf46-a72a45432d9d;muse;uitgeleend: nee;1.5
+CD;8f778958-d73a-46f3-a2dc-8098e2ec9749;Kalmah;uitgeleend: nee;1.5
+CD;7d73ec3b-b0eb-4ea5-9f9b-4f9024fe5072;chacha;uitgeleend: nee;1.5
+CD;e3ef4214-5203-4081-916f-89b0b9460427;chacha2;uitgeleend: nee;1.5

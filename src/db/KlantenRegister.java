@@ -1,13 +1,13 @@
 package db;
 
-import java.util.ArrayList;
-import java.util.List;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class KlantenRegister {
 
-	private static List<Klant> klanten = new ArrayList<Klant>();
+	private static ObservableList<Klant> klanten = FXCollections.observableArrayList();
 	
-	public static List<Klant> getKlanten()
+	public static ObservableList<Klant> getKlanten()
 	{
 		return klanten;
 	}

@@ -9,150 +9,114 @@ public class Adres {
 	private int nummer;
 	private String box;
 	private int postcode;
-	private String stad;
-	private String phone;
-	private String mobilePhone;
+	private String gemeente;
 	private String email;
-	private String fax;
 
 	/**
 	 * @return the street
 	 */
-	public String getStreet() {
+	public String getStraat()
+	{
 		return straat;
 	}
 
 	/**
 	 * @param street
-	 *            the street to set
+	 *           the street to set
 	 */
-	public void setStreet(String street) {
+	public void setStraat(String street)
+	{
 		this.straat = street;
 	}
 
 	/**
 	 * @return the number
 	 */
-	public int getNumber() {
+	public int getNummer()
+	{
 		return nummer;
 	}
 
 	/**
 	 * @param number
-	 *            the number to set
+	 *           the number to set
 	 */
-	public void setNumber(int number) {
+	public void setNummer(int number)
+	{
 		this.nummer = number;
 	}
 
 	/**
 	 * @return the box
 	 */
-	public String getBox() {
+	public String getBox()
+	{
 		return box;
 	}
 
 	/**
 	 * @param box
-	 *            the box to set
+	 *           the box to set
 	 */
-	public void setBox(String box) {
+	public void setBox(String box)
+	{
 		this.box = box;
 	}
 
 	/**
 	 * @return the zipCode
 	 */
-	public int getPostcode() {
+	public int getPostcode()
+	{
 		return postcode;
 	}
 
 	/**
 	 * @param zipCode
-	 *            the zipCode to set
+	 *           the zipCode to set
 	 */
-	public void setPostcode(int zipCode) {
+	public void setPostcode(int zipCode)
+	{
 		this.postcode = zipCode;
 	}
 
 	/**
 	 * @return the city
 	 */
-	public String getCity() {
-		return stad;
+	public String getGemeente()
+	{
+		return gemeente;
 	}
 
 	/**
 	 * @param city
-	 *            the city to set
+	 *           the city to set
 	 */
-	public void setCity(String city) {
-		this.stad = city;
-	}
-
-	/**
-	 * @return the phone
-	 */
-	public String getPhone() {
-		return phone;
-	}
-
-	/**
-	 * @param phone
-	 *            the phone to set
-	 */
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
-
-	/**
-	 * @return the mobilePhone
-	 */
-	public String getMobilePhone() {
-		return mobilePhone;
-	}
-
-	/**
-	 * @param mobilePhone
-	 *            the mobilePhone to set
-	 */
-	public void setMobilePhone(String mobilePhone) {
-		this.mobilePhone = mobilePhone;
+	public void setGemeente(String city)
+	{
+		this.gemeente = city;
 	}
 
 	/**
 	 * @return the email
 	 */
-	public String getEmail() {
+	public String getEmail()
+	{
 		return email;
 	}
 
 	/**
 	 * @param email
-	 *            the email to set
+	 *           the email to set
 	 */
-	public void setEmail(String email) {
+	public void setEmail(String email)
+	{
 		this.email = email;
 	}
 
-	/**
-	 * @return the fax
-	 */
-	public String getFax() {
-		return fax;
-	}
-
-	/**
-	 * @param fax
-	 *            the fax to set
-	 */
-	public void setFax(String fax) {
-		this.fax = fax;
-	}
-
-	public String toString() {
-		return String.format("%s %s bus %s\n%s %s\n%s\nTel.: %s\nGsm.: %s\nFax: %s", getStreet(), getNumber(), getBox(),
-				getPostcode(), getCity(), getEmail(), getPhone(),
-				getMobilePhone(), getFax());
+	public String toString()
+	{
+		return String.format("%s %s bus %s\n%s %s\n%s\n", getStraat(), getNummer(), getBox(), getPostcode(),
+				getGemeente(), getEmail());
 	}
 }

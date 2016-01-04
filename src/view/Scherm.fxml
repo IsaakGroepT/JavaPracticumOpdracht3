@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="438.0" prefWidth="743.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SchermController">
+   <children>
+      <TabPane layoutX="-1.0" prefHeight="438.0" prefWidth="744.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab closable="false" text="Items">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="367.0" prefWidth="766.0">
+                     <children>
+                        <TableView fx:id="tblItems" layoutX="14.0" layoutY="14.0" prefHeight="343.0" prefWidth="714.0">
+                          <columns>
+                            <TableColumn fx:id="tcID" prefWidth="303.0" text="Item ID" />
+                            <TableColumn fx:id="tcType" prefWidth="76.0" text="Type" />
+                            <TableColumn fx:id="tcTitel" prefWidth="236.0" text="Titel" />
+                              <TableColumn fx:id="tcUitgeleend" prefWidth="98.0" text="Uitgeleend" />
+                          </columns>
+                        </TableView>
+                        <ChoiceBox fx:id="cbTypes" layoutX="23.0" layoutY="365.0" prefWidth="150.0" />
+                        <TextField fx:id="tfTitel" layoutX="201.0" layoutY="365.0" prefHeight="26.0" prefWidth="352.0" promptText="Titel van item" />
+                        <Button fx:id="btnItemToevoegen" layoutX="592.0" layoutY="365.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="131.0" text="Toevoegen" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab closable="false" text="Klanten">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="tblKlanten" layoutX="14.0" layoutY="14.0" prefHeight="304.0" prefWidth="714.0">
+                           <columns>
+                              <TableColumn fx:id="tcKlantID" prefWidth="37.0" text="ID" />
+                              <TableColumn fx:id="tcVoornaam" prefWidth="110.0" text="Voornaam" />
+                              <TableColumn fx:id="tcAchternaam" prefWidth="102.0" text="Achternaam" />
+                              <TableColumn fx:id="tcStraat" prefWidth="97.0" text="Straat" />
+                              <TableColumn fx:id="tcNummer" prefWidth="27.0" text="Nr" />
+                              <TableColumn fx:id="tcPostcode" prefWidth="81.0" text="Postcode" />
+                              <TableColumn fx:id="tcGemeente" prefWidth="107.0" text="Gemeente" />
+                              <TableColumn fx:id="tfEmail" prefWidth="152.0" text="Email" />
+                           </columns>
+                        </TableView>
+                        <TextField fx:id="tfVoornaam" layoutX="14.0" layoutY="326.0" prefHeight="26.0" prefWidth="120.0" promptText="Voornaam" />
+                        <TextField fx:id="tfAchternaam" layoutX="146.0" layoutY="326.0" prefHeight="26.0" prefWidth="122.0" promptText="Achternaam" />
+                        <TextField fx:id="tfStraat" layoutX="14.0" layoutY="366.0" prefHeight="26.0" prefWidth="177.0" promptText="Straat" />
+                        <TextField fx:id="tfNummer" layoutX="203.0" layoutY="367.0" prefHeight="26.0" prefWidth="32.0" promptText="Nr" />
+                        <TextField fx:id="tfPostcode" layoutX="257.0" layoutY="367.0" prefHeight="26.0" prefWidth="84.0" promptText="Postcode" />
+                        <TextField fx:id="tfGemeente" layoutX="353.0" layoutY="367.0" prefHeight="26.0" prefWidth="153.0" promptText="Gemeente" />
+                        <Button fx:id="btnKlantToevoegen" layoutX="550.0" layoutY="332.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="175.0" text="Toevoegen" />
+                        <TextField fx:id="tfEmail" layoutX="285.0" layoutY="326.0" prefHeight="26.0" prefWidth="181.0" promptText="Emailadres" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+            <Tab closable="false" text="Uitleningen">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="tblUitleningen" layoutX="14.0" layoutY="14.0" prefHeight="343.0" prefWidth="714.0">
+                           <columns>
+                              <TableColumn prefWidth="92.0" text="Klant ID" />
+                              <TableColumn prefWidth="324.0" text="Item ID" />
+                              <TableColumn prefWidth="155.0" text="Start Uitleen" />
+                              <TableColumn prefWidth="142.0" text="Eind Uitleen" />
+                           </columns>
+                        </TableView>
+                        <ChoiceBox fx:id="cbItems" layoutX="15.0" layoutY="364.0" prefHeight="26.0" prefWidth="185.0" />
+                        <ChoiceBox fx:id="cbKlanten" layoutX="244.0" layoutY="364.0" prefHeight="26.0" prefWidth="203.0" />
+                        <Button fx:id="btnRegistreer" layoutX="497.0" layoutY="364.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="229.0" text="Registreer Uitlening" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>

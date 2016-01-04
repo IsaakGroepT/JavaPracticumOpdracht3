@@ -34,13 +34,12 @@ public abstract class Item {
 	}
 	
 	/**
-	 * Constructor die wordt gebruikt om gelezen items uit het bestand terug te creëren als objecten
+	 * Constructor die wordt gebruikt om gelezen items uit het bestand terug te creÃ«ren als objecten
 	 */
 	public Item(String titel, UUID id)
 	{
 		this.id = id;
 		this.titel = titel;
-		uitgeleend = true;
 		
 		ItemLijst.itemToevoegen(this);
 	}
@@ -55,9 +54,23 @@ public abstract class Item {
 		return titel;
 	}
 	
+	public ItemTypes getType()
+	{
+		return ItemTypes.valueOf(getClass().getSimpleName());
+	}
+	
 	public boolean isUitgeleend()
 	{
 		return uitgeleend;
+	}
+	
+	/**
+	 * String versie voor tabellen
+	 * @return
+	 */
+	public String isUitgeleendString()
+	{
+		return uitgeleend ? "Ja" : "Nee";
 	}
 
 	public void setUitgeleend(boolean isUitgeleend)

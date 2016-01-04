@@ -1,22 +1,24 @@
 package db;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import java.util.stream.Collectors;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import model.Item;
 import model.ItemTypes;
 
 public class ItemLijst {
 
-	static List<Item> items = new ArrayList<Item>();
+	static ObservableList<Item> items = FXCollections.observableArrayList();
 	
 	/**
 	 * Geeft gewoon de array met items terug
 	 * @return
 	 */
-	public static List<Item> getItems()
+	public static ObservableList<Item> getItems()
 	{
 		return items;
 	}
