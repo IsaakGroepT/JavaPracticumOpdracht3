@@ -1,4 +1,4 @@
-package controller;
+package application;
 
 import db.ItemOpslag;
 import db.ItemLijst;
@@ -8,7 +8,6 @@ import model.Adres;
 import model.CD;
 import model.Film;
 import model.Item;
-import model.ItemTypes;
 import model.Spel;
 import view.Main;
 
@@ -79,24 +78,6 @@ public class Winkel {
 		
 		// 't Is gedaan!
 		programmaExit();
-	}
-	
-	/**
-	 * Geformateerde resultaten
-	 */
-	private static void voorbeeldGeformateerdeItems()
-	{
-		System.out.println(ItemLijst.getItemsGeformateerd());
-	}
-	
-	/**
-	 * Zoeken op basis van een gegeven (deel van een) woord.
-	 */
-	private static void voorbeeldZoekenOpKernwoord()
-	{
-		for (Item item : ItemLijst.zoekItemsOpDeelString("alli", null)) {
-			System.out.println(item);
-		}
 	}
 	
 	/**
