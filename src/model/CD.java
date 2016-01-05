@@ -43,7 +43,7 @@ public class CD extends Item {
 	@Override
 	public String toString()
 	{
-		return super.toString() + ";" + prijs;
+		return super.toString() + " - " + prijs;
 	}
 	
 /*	@Override

@@ -1,23 +1,36 @@
 package controller;
 
 import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+
+import com.sun.prism.paint.Color;
+
 import db.ItemLijst;
 import db.Klant;
 import db.KlantenRegister;
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import model.Adres;
 import model.Item;
 import model.ItemTypes;
+import model.Exceptions.ItemInputProbleemException;
+import model.Exceptions.KlantInputProbleemException;
+import view.Main;
 
 public class SchermController {
 	@FXML
@@ -27,71 +40,38 @@ public class SchermController {
 //	@FXML
 //	private TableView<Uitlening> tblUitleningen;
 	@FXML
-	private Button btnItemToevoegen;
+	private Button btnItemToevoegen, btnKlantToevoegen, btnRegistreer, btnItemsZoeken;
 	@FXML
-	private Button btnKlantToevoegen;
-	@FXML
-	private Button btnRegistreer;
-	@FXML
-	private ChoiceBox<ItemTypes> cbTypes;
+	private ComboBox<ItemTypes> cbTypes;
 	@FXML
 	private ChoiceBox<Item> cbItems;
 	@FXML
 	private ChoiceBox<Klant> cbKlanten;
 	@FXML
-	private TextField tfTitel;
-	@FXML
-	private TextField tfVoornaam;
-	@FXML
-	private TextField tfAchternaam;
-	@FXML
-	private TextField tfStraat;
-	@FXML
-	private TextField tfNummer;
-	@FXML
-	private TextField tfPostcode;
-	@FXML
-	private TextField tfGemeente;
-	@FXML
-	private TextField tfEmail;
-	@FXML
-	private TableColumn<Item, String> tcID;
+	private TextField tfTitel, tfVoornaam, tfAchternaam, tfStraat, tfNummer, tfPostcode,
+	tfGemeente, TextField, tfEmail;
 	@FXML
 	private TableColumn<Item, ItemTypes> tcType;
 	@FXML
-	private TableColumn<Item, String> tcTitel;
+	private TableColumn<Item, String> tcID, tcTitel, tcUitgeleend;
 	@FXML
-	private TableColumn<Item, String> tcUitgeleend;
+	private TableColumn<Klant, String> tcVoornaam, tcAchternaam, tcStraat, tcGemeente, tcEmail;
 	@FXML
-	private TableColumn<Klant, Integer> tcKlantID;
-	@FXML
-	private TableColumn<Klant, String> tcVoornaam;
-	@FXML
-	private TableColumn<Klant, String> tcAchternaam;
-	@FXML
-	private TableColumn<Klant, String> tcStraat;
-	@FXML
-	private TableColumn<Klant, Integer> tcNummer;
-	@FXML
-	private TableColumn<Klant, Integer> tcPostcode;
-	@FXML
-	private TableColumn<Klant, String> tcGemeente;
-	@FXML
-	private TableColumn<Klant, String> tcEmail;
+	private TableColumn<Klant, Integer> tcKlantID, tcNummer, tcPostcode;
 	
 	@FXML
 	private void initialize()
 	{
-		/*
+		/****************
 		 * Items tabblad
-		 */
+		 ****************/
 		tcID.setCellValueFactory(new PropertyValueFactory<Item, String>("ID"));
 		tcType.setCellValueFactory(new PropertyValueFactory<Item, ItemTypes>("Type"));
 		tcTitel.setCellValueFactory(new PropertyValueFactory<Item, String>("Titel"));
 		tcUitgeleend.setCellValueFactory(new PropertyValueFactory<Item, String>("UitgeleendString"));
 		tblItems.setItems(ItemLijst.getItems());
 		
-		// Menu om rijen te verwijderen
+		// Menu om rijen te verwijderen voor de Item tabel
 		MenuItem menuVerwijder = new MenuItem("Verwijder Item");
 		menuVerwijder.setOnAction(e -> {
 			Item item = ItemLijst.getItems().get(tblItems.getSelectionModel().getSelectedIndex());
@@ -106,16 +86,30 @@ public class SchermController {
 		cbTypes.setItems(FXCollections.observableArrayList(ItemTypes.values()));
 		
 		btnItemToevoegen.setOnAction(e -> {
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.setTitle("Informatie Dialoog");
+			alert.setHeaderText(null);
+			
 			try {
 				itemToevoegen();
+			} catch (ItemInputProbleemException b) {
+				// Onze eigen Exception laat Dialog schermpjes zien
+				Main.toonFoutbericht(b.getMessage());
 			} catch (Exception e1) {
-				System.out.println("Probleem bij het toevoegen van de item: " + e1.getMessage());
+				// Dialog met meer details
+				Main.toonMegaFoutbericht(e1);
 			}
 		});
 		
-		/*
+		// Functionaliteit voor de knop "Zoeken"
+		btnItemsZoeken.setOnAction(ae -> {
+			Main.toonSchermZoeken();
+		});
+		btnItemsZoeken.setStyle("-fx-font-weight: bold");
+		
+		/******************
 		 * Klanten tabblad
-		 */
+		 ******************/
 		tcKlantID.setCellValueFactory(new PropertyValueFactory<Klant, Integer>("ID"));
 		tcVoornaam.setCellValueFactory(new PropertyValueFactory<Klant, String>("voornaam"));
 		tcAchternaam.setCellValueFactory(new PropertyValueFactory<Klant, String>("achternaam"));
@@ -136,25 +130,41 @@ public class SchermController {
 			return new ReadOnlyObjectWrapper<String>(cell.getValue().getAdres().getEmail());
 		});
 		
-		
 		tblKlanten.setItems(KlantenRegister.getKlanten());
+		
+		// Menu om rijen te verwijderen uit de Klant tabel
+		MenuItem menuKlantVerwijder = new MenuItem("Verwijder Klant");
+		menuKlantVerwijder.setOnAction(e -> {
+			Klant klant = KlantenRegister.getKlanten().get(tblKlanten.getSelectionModel().getSelectedIndex());
+
+			if (klant != null) { 
+				KlantenRegister.getKlanten().remove(klant);
+			}
+		});
+		tblKlanten.setContextMenu(new ContextMenu(menuKlantVerwijder));
 		
 		btnKlantToevoegen.setOnAction(e -> {
 			try {
 				klantToevoegen();
+			} catch (KlantInputProbleemException b) {
+				// Onze eigen Exception laat Dialog schermpjes zien
+				Main.toonFoutbericht(b.getMessage());
 			} catch (Exception e1) {
-				System.out.println("Probleem bij het toevoegen van de klant: " + e1.getMessage());
+				// Dialog met meer details
+				Main.toonMegaFoutbericht(e1);
 			}
 		});
 	}
 	
-	private void itemToevoegen() throws Exception
+	private void itemToevoegen() throws ClassNotFoundException, NoSuchMethodException, 
+	SecurityException, InstantiationException, IllegalAccessException,
+	IllegalArgumentException, InvocationTargetException, ItemInputProbleemException
 	{
-		// Validatie
+		// Validatie	
 		if (cbTypes.getValue() == null ) {
-			throw new Exception("Je moet een type kiezen");
+			throw new ItemInputProbleemException("Je moet het type van de item selecteren");
 		} else if (tfTitel.getText().trim().isEmpty()) {
-			throw new Exception("Je moet een titel ingeven");
+			throw new ItemInputProbleemException("Je moet de titel van de item invoeren");
 		}
 		
 		// Gelukt!
@@ -166,23 +176,24 @@ public class SchermController {
 		cons.newInstance(tfTitel.getText());
 	}
 	
-	private void klantToevoegen() throws Exception
+	private void klantToevoegen() throws KlantInputProbleemException
 	{
 		// Validatie
+		//TODO: dialogs
 		if (tfVoornaam.getText().trim().isEmpty() ) {
-			throw new Exception("Geef de voornaam van de klant in");
+			throw new KlantInputProbleemException("Geef de voornaam van de klant in");
 		} else if (tfAchternaam.getText().trim().isEmpty() ) {
-			throw new Exception("Geef de achternaam van de klant in");
+			throw new KlantInputProbleemException("Geef de achternaam van de klant in");
 		} else if (tfStraat.getText().trim().isEmpty() ) {
-			throw new Exception("Geef de straat van de klant in");
+			throw new KlantInputProbleemException("Geef de straat van de klant in");
 		} else if (tfNummer.getText().trim().isEmpty() ) {
-			throw new Exception("Geef het huisnummer van de klant in");
+			throw new KlantInputProbleemException("Geef het huisnummer van de klant in");
 		} else if (tfPostcode.getText().trim().isEmpty() ) {
-			throw new Exception("Geef de postcode van de klant in");
+			throw new KlantInputProbleemException("Geef de postcode van de klant in");
 		} else if (tfGemeente.getText().trim().isEmpty() ) {
-			throw new Exception("Geef de gemeente van de klant in");
+			throw new KlantInputProbleemException("Geef de gemeente van de klant in");
 		} else if (tfEmail.getText().trim().isEmpty() ) {
-			throw new Exception("Geef het emailadres van de klant in");
+			throw new KlantInputProbleemException("Geef het emailadres van de klant in");
 		}
 		// Gelukt!
 		

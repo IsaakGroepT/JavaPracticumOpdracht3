@@ -84,7 +84,7 @@ public abstract class Item {
 	@Override
 	public String toString()
 	{
-		return getClass().getSimpleName() + ";" + id + ";" + titel + ";uitgeleend: " + (uitgeleend ? "ja" : "nee");
+		return getClass().getSimpleName() + " - " + id + " - " + titel + " - uitgeleend: " + (uitgeleend ? "ja" : "nee");
 	}
 	
 	public double getBoete()

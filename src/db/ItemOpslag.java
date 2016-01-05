@@ -60,7 +60,7 @@ public class ItemOpslag {
 					break;
 				}
 
-				itemData = lijn.split(";");
+				itemData = lijn.split(" - ");
 				
 				//TODO: veranderen naar factory DP?
 				switch(itemData[0]) {
