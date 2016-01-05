@@ -79,7 +79,18 @@ public class ItemLijst {
 	 */
 	public static Item getItemObvID(UUID id)
 	{
-		return items.stream().filter(i -> i.getID() == id).findFirst().get();
+		return items.stream().filter(i -> i.getID().compareTo(id) == 0).findFirst().get();
+	}
+	
+	/**
+	 * Maak een lijst van alle item IDs die nog niet uitgeleend zijn. Uit deze lijst kan dan gekozen
+	 * worden om een uitlening te registreren obv van Item ID zoals de opdracht vereist
+	 * 
+	 * @return
+	 */
+	public static List<UUID> getUitleendbareItemIDs()
+	{
+		return items.stream().filter(i -> !i.isUitgeleend()).map(Item::getID).collect(Collectors.toList());
 	}
 	
 	/**

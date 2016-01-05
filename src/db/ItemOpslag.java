@@ -31,7 +31,7 @@ public class ItemOpslag {
 			}
 			OpslaanInBestand.close();
 		} catch (IOException e) {
-			System.out.println(e.toString());
+			e.printStackTrace();
 		}
 	}
 
@@ -78,7 +78,7 @@ public class ItemOpslag {
 				}
 			}
 		} catch (Exception e) {
-			System.out.println(e.toString());
+			e.printStackTrace();
 		} finally {
 			scanner.close();
 		}

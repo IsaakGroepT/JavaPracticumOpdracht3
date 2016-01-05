@@ -323,11 +323,14 @@ public class Datum {
 
     /**
      * Geef een string representatie terug van de datum
+     * 
      * @return Datum in string formaat
      */
     public String toString()
     {
-    	return dag + " " + Maanden.get(maand) + " " + jaar;
+   	 // We hebben dit nodig voor de opslag in bestand
+   	 return getDatumInEuropeesFormaat();
+   	 //return dag + " " + Maanden.get(maand) + " " + jaar;
     }
 
     /**

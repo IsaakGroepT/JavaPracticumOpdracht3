@@ -4,18 +4,19 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Scanner;
-import model.Adres;
-import model.Klant;
+import java.util.UUID;
 
-public class KlantOpslag {
+import model.Uitlening;
+
+public class UitleningenOpslag {
 
 	public static void opslaan()
 	{
 		try {
-			PrintWriter OpslaanInBestand = new PrintWriter("klanten.txt");
+			PrintWriter OpslaanInBestand = new PrintWriter("uitleningen.txt");
 
-			for (int n = 0; n < KlantenRegister.getKlanten().size(); n++) {
-				OpslaanInBestand.println(KlantenRegister.getKlanten().get(n));
+			for (int n = 0; n < UitleningenRegister.getUitleningen().size(); n++) {
+				OpslaanInBestand.println(UitleningenRegister.getUitleningen().get(n));
 			}
 			OpslaanInBestand.close();
 		} catch (IOException e) {
@@ -25,7 +26,7 @@ public class KlantOpslag {
 	
 	public static void lezen()
 	{
-		File file = new File("klanten.txt");
+		File file = new File("uitleningen.txt");
 		Scanner scanner = null;
 
 		if (!file.exists()) {
@@ -34,7 +35,7 @@ public class KlantOpslag {
 
 		try {
 			scanner = new Scanner(file);
-			String[] klantData;
+			String[] uitleningData;
 
 			while (scanner.hasNext()) {
 				String lijn = scanner.nextLine();
@@ -44,17 +45,11 @@ public class KlantOpslag {
 					break;
 				}
 
-				klantData = lijn.split(" \\| ");
-				
-				Adres adres = new Adres();
-				adres.setEmail(klantData[2]);
-				adres.setStraat(klantData[5]);
-				adres.setNummer(Integer.parseInt(klantData[6]));
-				adres.setPostcode(Integer.parseInt(klantData[7]));
-				adres.setGemeente(klantData[8]);
+				uitleningData = lijn.split(" \\| ");
 				
 				// Wordt ook autom. toegevoegd aan het register in de klasse zelf
-				new Klant(Integer.parseInt(klantData[1]), klantData[3], klantData[4], adres);
+				new Uitlening(Integer.parseInt(uitleningData[1]), UUID.fromString(uitleningData[2]), 
+						Integer.parseInt(uitleningData[3]), uitleningData[4]);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

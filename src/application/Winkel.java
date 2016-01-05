@@ -1,21 +1,20 @@
 package application;
 
 import db.ItemOpslag;
+import db.KlantOpslag;
+import db.KlantenRegister;
+import db.UitleningenOpslag;
+import db.UitleningenRegister;
 import db.ItemLijst;
-import db.Klant;
-import db.Uitleningen;
 import model.Adres;
 import model.CD;
 import model.Film;
-import model.Item;
+import model.Klant;
 import model.Spel;
+import model.Uitlening;
 import view.Main;
 
 public class Winkel {
-	
-	private static Klant klant1;
-	private static Klant klant2;
-	
 	
 	public static void main(String[] args)
 	{	
@@ -26,8 +25,9 @@ public class Winkel {
 		// Hebben we al opgeslagen gegevens?
 		ItemOpslag.lezen();
 		
-		// Zoiet, aanmaken!
+		// Zoniet, aanmaken!
 		if (ItemLijst.getItems().isEmpty()) {
+			// voorbeeldgegevens
 			new CD("Metallica");
 			new Film("Scary movie");
 			new Spel("Gtz");
@@ -43,63 +43,56 @@ public class Winkel {
 		}
 		
 		// Uitgeleend test
-		ItemLijst.getItems().get(0).setUitgeleend(true);
+		//ItemLijst.getItems().get(0).setUitgeleend(true);
 		
-		Adres adres1 = new Adres();
-		Adres adres2 = new Adres();
+		// Hebben we al opgeslagen klantgegevens?
+		KlantOpslag.lezen();
 		
-		adres1.setStraat("pilstraat");
-		adres1.setNummer(115);
-		adres1.setPostcode(3000);
-		adres1.setGemeente("Bxl");
-		adres1.setEmail("joske@mail.com");
+		if (KlantenRegister.getKlanten().isEmpty()) {
+			// voorbeeldgegevens
+			Adres adres1 = new Adres();
+			Adres adres2 = new Adres();
+			
+			adres1.setStraat("pilstraat");
+			adres1.setNummer(115);
+			adres1.setPostcode(3000);
+			adres1.setGemeente("Bxl");
+			adres1.setEmail("joske@mail.com");
+			
+			adres2.setStraat("polstraat");
+			adres2.setNummer(15);
+			adres2.setPostcode(1000);
+			adres2.setGemeente("Bxl");
+			adres2.setEmail("dencoolepatte@mail.com");
+			
+			// Klanten
+			new Klant("Joske", "Vermeulen", adres1);
+			new Klant("Patrick", "Pol", adres2);
+		} else {
+			// Debugging man
+			//KlantenRegister.getKlanten().stream().forEach(klant -> System.out.println(klant));
+		}
 		
-		adres2.setStraat("polstraat");
-		adres2.setNummer(15);
-		adres2.setPostcode(1000);
-		adres2.setGemeente("Bxl");
-		adres2.setEmail("dencoolepatte@mail.com");
-		
-		// Klanten
-		klant1 = new Klant("Joske", "Vermeulen", adres1);
-		klant2 = new Klant("Patrick", "Pol", adres2);
-				
-		// Test 1
-		//voorbeeldGeformateerdeItems();
-		
-		// Test 2
-		//voorbeeldZoekenOpKernwoord();
-		
-		// Test 3
-		//voorbeeldUitlening();
+		// Hebben we al opgeslagen uitleningen?
+			UitleningenOpslag.lezen();
+			
+		if (UitleningenRegister.getUitleningen().isEmpty()) {
+			try {
+				new Uitlening(KlantenRegister.getKlanten().get(0).getID(), ItemLijst.getItems().get(0).getID(), 5);
+				new Uitlening(KlantenRegister.getKlanten().get(1).getID(), ItemLijst.getItems().get(1).getID(), 31);
+			} catch (Exception e) {
+				System.out.println("Probleem met registreren uitlening in Winkel klasse: " + e.getMessage());
+			}
+		} else {
+			// Debugging man
+			//UitleningenRegister.getUitleningen().stream().forEach(klant -> System.out.println(klant));
+		}
 		
 		// Start de JavaFX GUI
 		Main.launch(Main.class, args);
 		
-		// 't Is gedaan!
+		// Bij het sluiten van de applicatie wordt dit uitgevoerd
 		programmaExit();
-	}
-	
-	/**
-	 * Een uitlening simuleren
-	 */
-	private static void voorbeeldUitlening()
-	{
-		Film film1 = (Film) ItemLijst.getItemObvIdx(1);
-		CD cd1 = (CD) ItemLijst.getItemObvIdx(0);
-		
-		System.out.println(Uitleningen.nieuweUitlening(klant1.getID(), film1.getID(), 4));
-		// cd1
-		System.out.println(Uitleningen.nieuweUitlening(klant2.getID(), cd1.getID(), 3));
-		
-		double boete = Uitleningen.uitleningStoppen(film1.getID());
-		
-		if (boete > 0) {
-			System.out.println("Het is te laat binnengebracht! Boete: " + boete + " euro");
-		}
-		else {
-			System.out.println("Er is geen boete want was op tijd terug");
-		}
 	}
 	
 	/**
@@ -108,5 +101,7 @@ public class Winkel {
 	private static void programmaExit()
 	{
 		ItemOpslag.opslaan();
+		KlantOpslag.opslaan();
+		UitleningenOpslag.opslaan();
 	}
 }

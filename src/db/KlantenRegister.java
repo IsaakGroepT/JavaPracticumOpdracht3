@@ -1,7 +1,11 @@
 package db;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import model.Klant;
 
 public class KlantenRegister {
 
@@ -21,6 +25,16 @@ public class KlantenRegister {
 	public static Klant getKlantObvID(int klantID)
 	{
 		return klanten.stream().filter(k -> k.getID() == klantID).findFirst().get();
+	}
+	
+	/**
+	 * Maak een lijst van alle klanten IDs
+	 * 
+	 * @return
+	 */
+	public static List<Integer> getKlantIDs()
+	{
+		return klanten.stream().map(Klant::getID).collect(Collectors.toList());
 	}
 	
 	/**

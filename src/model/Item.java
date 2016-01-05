@@ -10,6 +10,7 @@ public abstract class Item {
 	private String titel;
 	private boolean uitgeleend = false;
 	// Prijs wordt in de subklasse gespecifieerd
+	@SuppressWarnings("unused")
 	private double prijs;
 	private double boete = 3;
 	
@@ -34,7 +35,10 @@ public abstract class Item {
 	}
 	
 	/**
-	 * Constructor die wordt gebruikt om gelezen items uit het bestand terug te creÃ«ren als objecten
+	 * Constructor die wordt gebruikt om gelezen items uit het bestand terug te creëren als objecten
+	 * 
+	 * @param titel
+	 * @param id
 	 */
 	public Item(String titel, UUID id)
 	{
