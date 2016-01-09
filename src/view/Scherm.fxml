@@ -5,8 +5,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="439.0" prefWidth="733.0"
- xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SchermController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="439.0" prefWidth="733.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SchermController">
  <children>
   <TabPane layoutX="-1.0" prefHeight="439.0" prefWidth="744.0" tabClosingPolicy="UNAVAILABLE">
    <tabs>
@@ -22,12 +21,10 @@
           <TableColumn fx:id="tcUitgeleend" prefWidth="98.0" text="Uitgeleend" />
          </columns>
         </TableView>
-        <ComboBox fx:id="cbTypes" promptText="Type" layoutX="14.0" layoutY="371.0" prefWidth="150.0" />
+        <ComboBox fx:id="cbTypes" layoutX="14.0" layoutY="371.0" prefWidth="150.0" promptText="Type" />
         <TextField fx:id="tfTitel" layoutX="178.0" layoutY="371.0" prefHeight="26.0" prefWidth="271.0" promptText="Titel van item" />
-        <Button fx:id="btnItemToevoegen" layoutX="469.0" layoutY="371.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="111.0"
-         text="Toevoegen" underline="true" />
-        <Button fx:id="btnItemsZoeken" layoutX="602.0" layoutY="371.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="98.0"
-         text="Zoeken" />
+        <Button fx:id="btnItemToevoegen" layoutX="469.0" layoutY="371.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="111.0" text="Toevoegen" underline="true" />
+        <Button fx:id="btnItemsZoeken" layoutX="602.0" layoutY="371.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="98.0" text="Zoeken" />
        </children>
       </AnchorPane>
      </content>
@@ -55,8 +52,7 @@
         <TextField fx:id="tfPostcode" layoutX="257.0" layoutY="367.0" prefHeight="26.0" prefWidth="84.0" promptText="Postcode" />
         <TextField fx:id="tfGemeente" layoutX="353.0" layoutY="367.0" prefHeight="26.0" prefWidth="153.0" promptText="Gemeente" />
         <TextField fx:id="tfEmail" layoutX="285.0" layoutY="326.0" prefHeight="26.0" prefWidth="181.0" promptText="Emailadres" />
-        <Button fx:id="btnKlantToevoegen" layoutX="550.0" layoutY="332.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="175.0"
-         text="Toevoegen" underline="true" />
+        <Button fx:id="btnKlantToevoegen" layoutX="550.0" layoutY="332.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="175.0" text="Toevoegen" underline="true" />
        </children>
       </AnchorPane>
      </content>
@@ -67,17 +63,18 @@
        <children>
         <TableView fx:id="tblUitleningen" layoutX="14.0" layoutY="14.0" prefHeight="343.0" prefWidth="714.0">
          <columns>
-          <TableColumn fx:id="tcUitleningKlantID" prefWidth="92.0" text="Klant ID" />
-          <TableColumn fx:id="tcUitleningItemID" prefWidth="324.0" text="Item ID" />
-          <TableColumn fx:id="tcUitleenStart" prefWidth="155.0" text="Start Uitleen" />
-          <TableColumn fx:id="tcUitleenEinde" prefWidth="142.0" text="Eind Uitleen" />
+          <TableColumn fx:id="tcUitleningKlantID" prefWidth="68.0" text="Klant ID" />
+          <TableColumn fx:id="tcUitleningItemID" prefWidth="283.0" text="Item ID" />
+          <TableColumn fx:id="tcAantalDagen" prefWidth="56.0" text="Dagen" />
+          <TableColumn fx:id="tcPrijs" prefWidth="80.0" text="Prijs (EUR)" />
+          <TableColumn fx:id="tcUitleenStart" prefWidth="109.0" text="Start Uitleen" />
+          <TableColumn fx:id="tcUitleenEinde" prefWidth="108.0" text="Eind Uitleen" />
          </columns>
         </TableView>
-        <ComboBox fx:id="cbItemIDs" promptText="Item ID" layoutX="14.0" layoutY="371.0" prefHeight="26.0" prefWidth="185.0" />
-        <ComboBox fx:id="cbKlantIDs" promptText="Klant ID" layoutX="214.0" layoutY="371.0" prefHeight="26.0" prefWidth="203.0" />
+        <ComboBox fx:id="cbItemIDs" layoutX="14.0" layoutY="371.0" prefHeight="26.0" prefWidth="185.0" promptText="Item ID" />
+        <ComboBox fx:id="cbKlantIDs" layoutX="214.0" layoutY="371.0" prefHeight="26.0" prefWidth="203.0" promptText="Klant ID" />
         <TextField fx:id="tfAantalDagen" layoutX="433.0" layoutY="372.0" prefHeight="25.0" prefWidth="63.0" promptText="dagen" />
-        <Button fx:id="btnRegistreer" layoutX="538.0" layoutY="371.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="147.0"
-         text="Registreer Uitlening" underline="true" />
+        <Button fx:id="btnRegistreer" layoutX="538.0" layoutY="371.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="147.0" text="Registreer Uitlening" underline="true" />
        </children>
       </AnchorPane>
      </content>

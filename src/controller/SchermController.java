@@ -20,6 +20,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import model.Adres;
 import model.Datum;
 import model.Item;
@@ -60,11 +61,15 @@ public class SchermController {
 	@FXML
 	private TableColumn<Uitlening, Integer> tcUitleningKlantID;
 	@FXML
+	private TableColumn<Uitlening, String> tcAantalDagen;
+	@FXML
 	private TableColumn<Uitlening, UUID> tcUitleningItemID;
 	@FXML
 	private TableColumn<Uitlening, Datum> tcUitleenStart;
 	@FXML
 	private TableColumn<Uitlening, Datum> tcUitleenEinde;
+	@FXML
+	private TableColumn<Uitlening, Double> tcPrijs;
 	
 	@FXML
 	private void initialize()
@@ -169,8 +174,18 @@ public class SchermController {
 		tcUitleningItemID.setCellValueFactory(new PropertyValueFactory<Uitlening, UUID>("itemID"));
 		tcUitleenStart.setCellValueFactory(new PropertyValueFactory<Uitlening, Datum>("startDatum"));
 		tcUitleenEinde.setCellValueFactory(new PropertyValueFactory<Uitlening, Datum>("eindDatum"));
+		tcPrijs.setCellValueFactory(new PropertyValueFactory<Uitlening, Double>("prijs"));
+		// tcAantalDagen moet bewerkbaar zijn dus casten we het naar String en...
+		tcAantalDagen.setCellValueFactory(cell -> {
+			return new ReadOnlyObjectWrapper<String>(Integer.toString(cell.getValue().getAantalDagen()));
+		});
+		// ...maken we de kolom bewerkbaar, maar...
+		tcAantalDagen.setCellFactory(TextFieldTableCell.forTableColumn());
 		
 		tblUitleningen.setItems(UitleningenRegister.getUitleningen());
+		// ...de tabel moet dan globaal bewerkbaar ingesteld worden. Is wel enkel van toepassing op
+		// onze kolom hierboven
+		tblUitleningen.setEditable(true);
 		
 		// Menu om rijen te verwijderen uit de Uitlening tabel
 		MenuItem menuUitleningVerwijder = new MenuItem("Stop Uitlening");
@@ -181,7 +196,7 @@ public class SchermController {
 				try {
 					int dagenTeLaat = uitlening.getAantalDagenTeLaat();
 					
-					// Niet echt efficiënt, maar de opdracht was om de uitlening te kunnen stoppen
+					// Niet echt efficient, maar de opdracht was om de uitlening te kunnen stoppen
 					// door ingave van Item ID. De uitlening wordt ook door deze methode verwijderd uit
 					// de lijst
 					double boete = UitleningenRegister.uitleningStoppen(uitlening.getItemID());
@@ -200,6 +215,10 @@ public class SchermController {
 		cbItemIDs.setItems(FXCollections.observableArrayList(ItemLijst.getUitleendbareItemIDs()));
 		cbKlantIDs.setItems(FXCollections.observableArrayList(KlantenRegister.getKlantIDs()));
 		
+		/****
+		 * Actionlisteners
+		 ****/
+		
 		btnRegistreer.setOnAction(e -> {
 			try {
 				uitleningToevoegen();
@@ -212,6 +231,17 @@ public class SchermController {
 			}
 		});
 		
+		// Onthoud nieuwe aantaldagen en verander de einddatum van de uitlening
+		tcAantalDagen.setOnEditCommit(cell -> {
+			int dagen = Integer.parseInt(cell.getNewValue());
+			
+			cell.getRowValue().setAantalDagen(dagen);
+			try {
+				cell.getRowValue().veranderEindDatum(dagen);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		});
 	}
 	
 	/**
@@ -297,8 +327,6 @@ public class SchermController {
 			throw new UitleningInputProbleemException("Selecteer de Klant ID van de uitlening");
 		} else if (tfAantalDagen.getText().trim().isEmpty() ) {
 			throw new UitleningInputProbleemException("Geef het aantal dagen van de uitlening in");
-		} else if (Integer.parseInt(tfAantalDagen.getText()) > 0 && Integer.parseInt(tfAantalDagen.getText()) >= 31) {
-			throw new UitleningInputProbleemException("Het item kan maar tussen 1 en 31 dagen uitgeleend worden");
 		}
 		//...gelukt!
 		

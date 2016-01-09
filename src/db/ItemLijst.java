@@ -86,11 +86,24 @@ public class ItemLijst {
 	 * Maak een lijst van alle item IDs die nog niet uitgeleend zijn. Uit deze lijst kan dan gekozen
 	 * worden om een uitlening te registreren obv van Item ID zoals de opdracht vereist
 	 * 
+	 * Vanaf Opdracht 3 deel 2 deprecated
+	 * 
+	 * @deprecated
 	 * @return
 	 */
 	public static List<UUID> getUitleendbareItemIDs()
 	{
 		return items.stream().filter(i -> !i.isUitgeleend()).map(Item::getID).collect(Collectors.toList());
+	}
+	
+	/**
+	 * Lijst van item namen voor de combobox in de GUI
+	 * 
+	 * @return
+	 */
+	public static List<String> getItemTitels()
+	{
+		return items.stream().map(Item::getTitel).collect(Collectors.toList());
 	}
 	
 	/**

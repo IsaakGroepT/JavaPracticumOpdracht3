@@ -32,7 +32,7 @@ public class Uitlening {
 	}
 	
 	/**
-	 * Constructor die wordt gebruikt om gelezen uitlenigen uit het bestand terug te creëren 
+	 * Constructor die wordt gebruikt om gelezen uitlenigen uit het bestand terug te creeren 
 	 * als objecten
 	 * 
 	 * @param klantID
@@ -71,6 +71,11 @@ public class Uitlening {
 		return aantalDagen;
 	}
 	
+	public void setAantalDagen(int dagen)
+	{
+		aantalDagen = dagen;
+	}
+	
 	/**
 	 * Is gewoon een verwijzing met de getPrijs van de Item (sub)klassen
 	 * 
@@ -89,6 +94,18 @@ public class Uitlening {
 	public Datum getEindDatum()
 	{
 		return eindDatum;
+	}
+	
+	/**
+	 * Het aantal dagen van de uitlening is aangepast, dus we moeten de einddatum ook veranderen
+	 * 
+	 * @param dagen
+	 * @throws Exception 
+	 */
+	public void veranderEindDatum(int dagen) throws Exception
+	{
+		eindDatum = new Datum(startDatum);
+		eindDatum.veranderDatum(dagen);
 	}
 	
 	/**
