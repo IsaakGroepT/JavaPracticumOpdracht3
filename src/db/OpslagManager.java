@@ -25,6 +25,8 @@
 package db;
 
 /**
+ * De client voor de opslag strategie
+ * 
  * @author Isaak Malik
  */
 public class OpslagManager implements OpslagStrategy {
@@ -45,5 +47,11 @@ public class OpslagManager implements OpslagStrategy {
 	public void opslaan()
 	{
 		this.strategy.opslaan();
+	}
+
+	@Override
+	public void close()
+	{
+		this.strategy.close();
 	}
 }

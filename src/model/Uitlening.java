@@ -32,7 +32,7 @@ public class Uitlening {
 	}
 	
 	/**
-	 * Constructor die wordt gebruikt om gelezen uitlenigen uit het bestand terug te creeren 
+	 * Constructor die wordt gebruikt om gelezen uitlenigen uit de opslag terug te creeren 
 	 * als objecten
 	 * 
 	 * @param klantID

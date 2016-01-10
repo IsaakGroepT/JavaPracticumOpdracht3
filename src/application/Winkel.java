@@ -1,9 +1,6 @@
 package application;
 
-import db.ItemOpslag;
-import db.KlantOpslag;
 import db.KlantenRegister;
-import db.UitleningenOpslag;
 import db.UitleningenRegister;
 import db.ItemLijst;
 import db.OpslagManager;
@@ -23,8 +20,7 @@ public class Winkel {
 	public static void main(String[] args)
 	{
 		db = new OpslagManager();
-		//db.setStrategy(new DerbyOpslagStrategy());
-		db.setStrategy(new BestandOpslagStrategy());
+		db.setStrategy(new DerbyOpslagStrategy());
 		// Hebben we al opgeslagen gegevens?
 		db.lezen();
 		
@@ -102,9 +98,7 @@ public class Winkel {
 	 */
 	private static void programmaExit()
 	{
-		/*ItemOpslag.opslaan();
-		KlantOpslag.opslaan();
-		UitleningenOpslag.opslaan();*/
 		db.opslaan();
+		db.close();
 	}
 }

@@ -1,4 +1,0 @@
-Uitlening | 1 | 93bd54ce-7ce5-41cf-a4e8-40c3923d3f27 | 5 | 09/01/2016
-Uitlening | 2 | b8e5cc3d-5e80-440f-a9b1-0fa4d471bdf9 | 31 | 09/01/2016
-Uitlening | 1 | 3e12bb0e-1448-4c36-933d-3168f61396f3 | 9 | 09/01/2016
-Uitlening | 2 | 739ab567-ee62-41ab-a3d1-e91883168ccb | 6 | 10/01/2016

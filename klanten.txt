@@ -1,3 +1,0 @@
-Klant | 1 | joske@mail.com | Joske | Vermeulen | pilstraat | 115 | 3000 | Bxl
-Klant | 2 | dencoolepatte@mail.com | Patrick | Pol | polstraat | 15 | 1000 | Bxl
-Klant | 3 | ik@niet.be | ik | niet | straat | 100 | 2000 | Antwerpen

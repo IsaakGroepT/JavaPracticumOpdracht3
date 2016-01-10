@@ -31,4 +31,5 @@ public interface OpslagStrategy {
 
 	public void lezen();
 	public void opslaan();
+	public void close();
 }

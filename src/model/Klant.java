@@ -5,15 +5,21 @@ import java.util.concurrent.atomic.AtomicInteger;
 import db.KlantenRegister;
 
 public class Klant {
-	private String voornaam;
-	private String achternaam;
-	private Adres adres;
-	private static AtomicInteger uniekeID = new AtomicInteger(); 
-	private final int ID;
+	private final String voornaam;
+	private final String achternaam;
+	private final Adres adres;
+	private int ID;
 	
+	/**
+	 * Voor nieuwe creaties in de broncode zelf
+	 * 
+	 * @param voornaam
+	 * @param achternaam
+	 * @param adres 
+	 */
 	public Klant(String voornaam, String achternaam, Adres adres)
 	{
-		ID = uniekeID.incrementAndGet();
+		ID = KlantenRegister.getNieuweID();
 		this.voornaam = voornaam;
 		this.achternaam = achternaam;
 		this.adres = adres;
@@ -22,13 +28,17 @@ public class Klant {
 	}
 	
 	/**
-	 * Constructor die wordt gebruikt om gelezen klanten uit het bestand terug te creëren als objecten
+	 * Constructor die wordt gebruikt om gelezen klanten uit de opslag terug te creÃ«ren als objecten
 	 * 
-	 * @return
+	 * @param ID
+	 * @param voornaam
+	 * @param achternaam
+	 * @param adres 
 	 */
 	public Klant(Integer ID, String voornaam, String achternaam, Adres adres)
 	{
 		this.ID = ID;
+		KlantenRegister.setHoogsteID(ID);
 		this.voornaam = voornaam;
 		this.achternaam = achternaam;
 		this.adres = adres;
@@ -63,7 +73,7 @@ public class Klant {
 	public String toString()
 	{
 		return String.format("%s | %d | %s | %s | %s | %s | %d | %d | %s",
-				getClass().getSimpleName(), ID, adres.getEmail(), voornaam, achternaam, adres.getStraat(), adres.getNummer(), 
+				getClass().getSimpleName(), getID(), adres.getEmail(), voornaam, achternaam, adres.getStraat(), adres.getNummer(), 
 				adres.getPostcode(), adres.getGemeente());
 	}
 }

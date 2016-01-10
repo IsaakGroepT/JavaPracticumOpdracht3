@@ -35,7 +35,7 @@ public abstract class Item {
 	}
 	
 	/**
-	 * Constructor die wordt gebruikt om gelezen items uit het bestand terug te creeren als objecten
+	 * Constructor die wordt gebruikt om gelezen items uit de opslag terug te creeren als objecten
 	 * 
 	 * @param titel
 	 * @param id

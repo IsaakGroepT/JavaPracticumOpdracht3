@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import model.Klant;
 
 public class KlantenRegister {
+	private static int ID = 0;
 
 	private static ObservableList<Klant> klanten = FXCollections.observableArrayList();
 	
@@ -45,5 +46,24 @@ public class KlantenRegister {
 	public static void klantToevoegen(Klant klant)
 	{
 		klanten.add(klant);
+	}
+	
+	/**
+	 * Vergelijk gegeven ID met de huidige en indien groter gebruik deze dan ook
+	 */
+	public static void setHoogsteID(int nieuweID)
+	{
+		if (nieuweID > ID) {
+			ID = nieuweID;
+		}
+	}
+	
+	/**
+	 * 
+	 * @return 
+	 */
+	public static int getNieuweID()
+	{
+		return ++ID;
 	}
 }

@@ -43,6 +43,8 @@ import model.Uitlening;
  * @author Isaak Malik
  */
 public class BestandOpslagStrategy implements OpslagStrategy {
+	private static PrintWriter OpslaanInBestand = null;
+	private static Scanner scanner = null;
 
 	@Override
 	public void lezen()
@@ -52,6 +54,10 @@ public class BestandOpslagStrategy implements OpslagStrategy {
 		uitleningenLezen();
 	}
 
+	/**
+	 * Opslaan is elke keer een frisse opslag want PrintWriter() houdt geen rekening met
+	 * reeds bestaande inhoud
+	 */
 	@Override
 	public void opslaan()
 	{
@@ -63,12 +69,11 @@ public class BestandOpslagStrategy implements OpslagStrategy {
 	public static void itemsOpslaan()
 	{
 		try {
-			PrintWriter OpslaanInBestand = new PrintWriter("items.txt");
+			OpslaanInBestand = new PrintWriter("items.txt");
 
 			for (int n = 0; n < ItemLijst.getItems().size(); n++) {
 				OpslaanInBestand.println(ItemLijst.getItemObvIdx(n));
 			}
-			OpslaanInBestand.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -77,7 +82,6 @@ public class BestandOpslagStrategy implements OpslagStrategy {
 	public static void itemsLezen()
 	{
 		File file = new File("items.txt");
-		Scanner scanner = null;
 
 		if (!file.exists()) {
 			return;
@@ -103,7 +107,6 @@ public class BestandOpslagStrategy implements OpslagStrategy {
 					case "CD":
 					case "Film":
 					case "Spel":
-						//TODO: Enkel items moeten worden opgeslagen, zonder uitleendetails
 						Class<?> klasse = Class.forName("model." + itemData[0]);
 						Constructor<?> cons = klasse.getConstructor(String.class, UUID.class);
 						Object itemObject = cons.newInstance(itemData[2], UUID.fromString(itemData[1]));
@@ -115,20 +118,17 @@ public class BestandOpslagStrategy implements OpslagStrategy {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-		} finally {
-			scanner.close();
 		}
 	}
 	
 	public static void klantenOpslaan()
 	{
 		try {
-			PrintWriter OpslaanInBestand = new PrintWriter("klanten.txt");
+			OpslaanInBestand = new PrintWriter("klanten.txt");
 
 			for (int n = 0; n < KlantenRegister.getKlanten().size(); n++) {
 				OpslaanInBestand.println(KlantenRegister.getKlanten().get(n));
 			}
-			OpslaanInBestand.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -137,7 +137,6 @@ public class BestandOpslagStrategy implements OpslagStrategy {
 	public static void klantenLezen()
 	{
 		File file = new File("klanten.txt");
-		Scanner scanner = null;
 
 		if (!file.exists()) {
 			return;
@@ -169,20 +168,17 @@ public class BestandOpslagStrategy implements OpslagStrategy {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-		} finally {
-			scanner.close();
 		}
 	}
 	
 	public static void uitleningenOpslaan()
 	{
 		try {
-			PrintWriter OpslaanInBestand = new PrintWriter("uitleningen.txt");
+			OpslaanInBestand = new PrintWriter("uitleningen.txt");
 
 			for (int n = 0; n < UitleningenRegister.getUitleningen().size(); n++) {
 				OpslaanInBestand.println(UitleningenRegister.getUitleningen().get(n));
 			}
-			OpslaanInBestand.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -191,7 +187,6 @@ public class BestandOpslagStrategy implements OpslagStrategy {
 	public static void uitleningenLezen()
 	{
 		File file = new File("uitleningen.txt");
-		Scanner scanner = null;
 
 		if (!file.exists()) {
 			return;
@@ -217,7 +212,16 @@ public class BestandOpslagStrategy implements OpslagStrategy {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-		} finally {
+		}
+	}
+
+	@Override
+	public void close()
+	{
+		if (OpslaanInBestand != null) {
+			OpslaanInBestand.close();
+		}
+		if (scanner != null) {
 			scanner.close();
 		}
 	}
