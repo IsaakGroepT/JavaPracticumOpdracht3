@@ -4,6 +4,6 @@ Spel - 2e7098fb-62e5-4bad-8c2d-ead094e07035 - Gtz - uitgeleend: nee - 3.0
 CD - cc6f394b-5dd7-4a0b-99b9-34375842f2fa - Metallica - uitgeleend: nee - 1.5
 CD - 2126e32a-1173-4580-b881-a85e4961ab60 - Netallica3 - uitgeleend: nee - 1.5
 CD - e676ed59-18bf-47b7-9796-b2afb3c3d42a - Petallica2 - uitgeleend: nee - 1.5
-Film - 739ab567-ee62-41ab-a3d1-e91883168ccb - Scary movie - uitgeleend: nee - 5.0
+Film - 739ab567-ee62-41ab-a3d1-e91883168ccb - Scary movie - uitgeleend: ja - 5.0
 Film - 3e12bb0e-1448-4c36-933d-3168f61396f3 - Scary movie2 - uitgeleend: ja - 5.0
 CD - 48f8dfe0-ac9b-4ef4-8c02-a08310076119 - zagemuziek - uitgeleend: nee - 1.5
