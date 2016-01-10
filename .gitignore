@@ -28,6 +28,19 @@ local.properties
 # PDT-specific
 .buildpath
 
+#################
+## Netbeans
+#################
+
+nbproject/
+build/
+nbbuild/
+dist/
+nbdist/
+nbactions.xml
+.nb-gradle/
+manifest.mf
+build.xml
 
 #################
 ## Visual Studio
