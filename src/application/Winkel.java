@@ -6,6 +6,9 @@ import db.KlantenRegister;
 import db.UitleningenOpslag;
 import db.UitleningenRegister;
 import db.ItemLijst;
+import db.OpslagManager;
+import db.bestand.BestandOpslagStrategy;
+import db.derby.DerbyOpslagStrategy;
 import model.Adres;
 import model.CD;
 import model.Film;
@@ -15,15 +18,20 @@ import model.Uitlening;
 import view.Main;
 
 public class Winkel {
+	private static OpslagManager db;
 	
 	public static void main(String[] args)
-	{	
+	{
+		db = new OpslagManager();
+		//db.setStrategy(new DerbyOpslagStrategy());
+		db.setStrategy(new BestandOpslagStrategy());
+		// Hebben we al opgeslagen gegevens?
+		db.lezen();
+		
 		/* 
 		 * Eerst items aanmaken zonder deze al per type te groeperen om later de sort functie te
 		 * controleren
 		 */
-		// Hebben we al opgeslagen gegevens?
-		ItemOpslag.lezen();
 		
 		// Zoniet, aanmaken!
 		if (ItemLijst.getItems().isEmpty()) {
@@ -44,9 +52,6 @@ public class Winkel {
 		
 		// Uitgeleend test
 		//ItemLijst.getItems().get(0).setUitgeleend(true);
-		
-		// Hebben we al opgeslagen klantgegevens?
-		KlantOpslag.lezen();
 		
 		if (KlantenRegister.getKlanten().isEmpty()) {
 			// voorbeeldgegevens
@@ -73,9 +78,6 @@ public class Winkel {
 			//KlantenRegister.getKlanten().stream().forEach(klant -> System.out.println(klant));
 		}
 		
-		// Hebben we al opgeslagen uitleningen?
-			UitleningenOpslag.lezen();
-			
 		if (UitleningenRegister.getUitleningen().isEmpty()) {
 			try {
 				new Uitlening(KlantenRegister.getKlanten().get(0).getID(), ItemLijst.getItems().get(0).getID(), 5);
@@ -100,8 +102,9 @@ public class Winkel {
 	 */
 	private static void programmaExit()
 	{
-		ItemOpslag.opslaan();
+		/*ItemOpslag.opslaan();
 		KlantOpslag.opslaan();
-		UitleningenOpslag.opslaan();
+		UitleningenOpslag.opslaan();*/
+		db.opslaan();
 	}
 }
