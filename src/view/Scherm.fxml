@@ -64,7 +64,7 @@
         <TableView fx:id="tblUitleningen" layoutX="14.0" layoutY="14.0" prefHeight="343.0" prefWidth="714.0">
          <columns>
           <TableColumn fx:id="tcUitleningKlantID" prefWidth="68.0" text="Klant ID" />
-          <TableColumn fx:id="tcUitleningItemID" prefWidth="283.0" text="Item ID" />
+          <TableColumn fx:id="tcUitleningItemID" prefWidth="300.0" text="Item ID" />
           <TableColumn fx:id="tcAantalDagen" prefWidth="56.0" text="Dagen" />
           <TableColumn fx:id="tcPrijs" prefWidth="80.0" text="Prijs (EUR)" />
           <TableColumn fx:id="tcUitleenStart" prefWidth="109.0" text="Start Uitleen" />

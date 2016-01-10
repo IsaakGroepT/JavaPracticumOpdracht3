@@ -21,6 +21,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.util.converter.IntegerStringConverter;
 import model.Adres;
 import model.Datum;
 import model.Item;
@@ -59,9 +60,9 @@ public class SchermController {
 	@FXML
 	private TableColumn<Klant, Integer> tcKlantID, tcNummer, tcPostcode;
 	@FXML
-	private TableColumn<Uitlening, Integer> tcUitleningKlantID;
-	@FXML
-	private TableColumn<Uitlening, String> tcAantalDagen;
+	private TableColumn<Uitlening, Integer> tcUitleningKlantID, tcAantalDagen;
+	//@FXML
+	//private TableColumn<Uitlening, String> tcAantalDagen;
 	@FXML
 	private TableColumn<Uitlening, UUID> tcUitleningItemID;
 	@FXML
@@ -175,12 +176,20 @@ public class SchermController {
 		tcUitleenStart.setCellValueFactory(new PropertyValueFactory<Uitlening, Datum>("startDatum"));
 		tcUitleenEinde.setCellValueFactory(new PropertyValueFactory<Uitlening, Datum>("eindDatum"));
 		tcPrijs.setCellValueFactory(new PropertyValueFactory<Uitlening, Double>("prijs"));
-		// tcAantalDagen moet bewerkbaar zijn dus casten we het naar String en...
-		tcAantalDagen.setCellValueFactory(cell -> {
-			return new ReadOnlyObjectWrapper<String>(Integer.toString(cell.getValue().getAantalDagen()));
+		tcAantalDagen.setCellValueFactory(new PropertyValueFactory<Uitlening, Integer>("aantalDagen"));
+		// We maken een eigen implementatie om met integers te kunnen werken bij een bewerkbare cell en
+		// om de veranderde waarde terug te resetten als het < 1 of > 31
+		tcAantalDagen.setCellFactory(col -> new TextFieldTableCell<Uitlening, Integer>(new IntegerStringConverter())
+		{
+			@Override
+		   public void updateItem(Integer item, boolean empty)
+		   {
+				if (!empty && (item.intValue() < 1 || item.intValue() > 31)) {
+				    item = getItem();
+				}
+				super.updateItem(item, empty);
+		   }
 		});
-		// ...maken we de kolom bewerkbaar, maar...
-		tcAantalDagen.setCellFactory(TextFieldTableCell.forTableColumn());
 		
 		tblUitleningen.setItems(UitleningenRegister.getUitleningen());
 		// ...de tabel moet dan globaal bewerkbaar ingesteld worden. Is wel enkel van toepassing op
@@ -233,7 +242,16 @@ public class SchermController {
 		
 		// Onthoud nieuwe aantaldagen en verander de einddatum van de uitlening
 		tcAantalDagen.setOnEditCommit(cell -> {
-			int dagen = Integer.parseInt(cell.getNewValue());
+			// Een lege waarde was gegeven
+			if (cell.getNewValue() == null) {
+				return;
+			}
+			int dagen = cell.getNewValue();
+			
+			if (dagen < 1 || dagen > 31) {
+				Main.toonFoutbericht("Het item kan maar tussen 1 en 31 dagen uitgeleend worden");
+				return;
+			}
 			
 			cell.getRowValue().setAantalDagen(dagen);
 			try {
@@ -327,6 +345,8 @@ public class SchermController {
 			throw new UitleningInputProbleemException("Selecteer de Klant ID van de uitlening");
 		} else if (tfAantalDagen.getText().trim().isEmpty() ) {
 			throw new UitleningInputProbleemException("Geef het aantal dagen van de uitlening in");
+		} else if (Integer.parseInt(tfAantalDagen.getText()) < 1 || Integer.parseInt(tfAantalDagen.getText())  > 31) {
+			throw new UitleningInputProbleemException("Het item kan maar tussen 1 en 31 dagen uitgeleend worden");
 		}
 		//...gelukt!
 		
