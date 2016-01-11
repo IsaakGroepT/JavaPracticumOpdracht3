@@ -1,3 +1,26 @@
+/*
+ * The MIT License
+ *
+ * Copyright 2016 Isaak Malik.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
 package controller;
 
 import java.lang.reflect.Constructor;
@@ -33,6 +56,9 @@ import model.Exceptions.KlantInputProbleemException;
 import model.Exceptions.UitleningInputProbleemException;
 import view.Main;
 
+/**
+ * @author Isaak Malik
+ */
 public class SchermController {
 	@FXML
 	private TableView<Item> tblItems;
@@ -41,7 +67,8 @@ public class SchermController {
 	@FXML
 	private TableView<Uitlening> tblUitleningen;
 	@FXML
-	private Button btnItemToevoegen, btnKlantToevoegen, btnRegistreer, btnItemsZoeken;
+	private Button btnItemToevoegen, btnKlantToevoegen, btnRegistreer, btnItemsZoeken,
+						btnKlantenzone;
 	@FXML
 	private ComboBox<ItemTypes> cbTypes;
 	@FXML
@@ -61,14 +88,10 @@ public class SchermController {
 	private TableColumn<Klant, Integer> tcKlantID, tcNummer, tcPostcode;
 	@FXML
 	private TableColumn<Uitlening, Integer> tcUitleningKlantID, tcAantalDagen;
-	//@FXML
-	//private TableColumn<Uitlening, String> tcAantalDagen;
 	@FXML
 	private TableColumn<Uitlening, UUID> tcUitleningItemID;
 	@FXML
-	private TableColumn<Uitlening, Datum> tcUitleenStart;
-	@FXML
-	private TableColumn<Uitlening, Datum> tcUitleenEinde;
+	private TableColumn<Uitlening, Datum> tcUitleenStart, tcUitleenEinde;
 	@FXML
 	private TableColumn<Uitlening, Double> tcPrijs;
 	
@@ -119,6 +142,11 @@ public class SchermController {
 			Main.toonSchermZoeken();
 		});
 		btnItemsZoeken.setStyle("-fx-font-weight: bold");
+		
+		// Klantenzone
+		btnKlantenzone.setOnAction(e -> {
+			Main.toonSchermKlantenZone();
+		});
 		
 		/******************
 		 * Klanten tabblad

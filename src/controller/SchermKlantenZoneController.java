@@ -21,17 +21,39 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package model.Exceptions;
+
+package controller;
+
+import db.KlantenRegister;
+import db.UitleningenRegister;
+import java.util.stream.Collectors;
+import javafx.collections.FXCollections;
+import javafx.fxml.FXML;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 
 /**
  * @author Isaak Malik
  */
-public class KlantInputProbleemException extends Exception {
+public class SchermKlantenZoneController {
+	@FXML
+	private ComboBox<Integer> cbKlantIDs;
+	@FXML
+	private TextArea taLijstUitleningen;
+	@FXML
+	private Label lbVoornaam, lbAchternaam;
 
-	public KlantInputProbleemException() {}
-	
-	public KlantInputProbleemException(String bericht)
+	@FXML
+	private void initialize()
 	{
-		super(bericht);
+		cbKlantIDs.setItems(FXCollections.observableArrayList(KlantenRegister.getKlantIDs()));
+		
+		cbKlantIDs.setOnAction(e -> {
+			ComboBox cbIDs = (ComboBox) e.getSource();
+			
+			taLijstUitleningen.clear();
+			taLijstUitleningen.appendText("Moet nog geïmplementeerd worden");
+		});
 	}
 }
