@@ -21,53 +21,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
-package db;
-
-import db.bestand.BestandOpslagStrategy;
-import db.derby.DerbyOpslagStrategy;
-import model.OpslagStrategieen;
+package model;
 
 /**
- * De client voor de opslag strategie
- * 
- * @author Isaak Malik
+ * @author Isaak
  */
-public class OpslagManager {
-	private static OpslagStrategy strategy;
-	
-	/**
-	 * Singleton constructor
-	 */
-	private OpslagManager(){}
-
-	/**
-	 * Eerst moet de strategy type worden ingesteld
-	 * 
-	 * @param strategieType 
-	 */
-	public static void setStrategy(OpslagStrategieen strategieType)
-	{
-		switch (strategieType) {
-			case DATABANK:
-				strategy = new DerbyOpslagStrategy();
-				break;
-			case BESTAND:
-				strategy = new BestandOpslagStrategy();
-				break;
-			case EXCEL:
-				// Nog niks
-				break;
-		}
-	}
-	
-	/**
-	 * Zo halen we het object op
-	 * 
-	 * @return 
-	 */
-	public static OpslagStrategy getInstance()
-	{
-		return strategy;
-	}
+public enum OpslagStrategieen {
+	DATABANK,
+	BESTAND,
+	EXCEL
 }

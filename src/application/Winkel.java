@@ -28,12 +28,11 @@ import db.UitleningenRegister;
 import db.ItemLijst;
 import db.OpslagManager;
 import db.OpslagStrategy;
-import db.bestand.BestandOpslagStrategy;
-import db.derby.DerbyOpslagStrategy;
 import model.Adres;
 import model.CD;
 import model.Film;
 import model.Klant;
+import model.OpslagStrategieen;
 import model.Spel;
 import model.Uitlening;
 import view.Main;
@@ -46,7 +45,7 @@ public class Winkel {
 	
 	public static void main(String[] args)
 	{
-		OpslagManager.setStrategy("db");
+		OpslagManager.setStrategy(OpslagStrategieen.DATABANK);
 		db = OpslagManager.getInstance();
 		// Hebben we al opgeslagen gegevens?
 		db.lezen();

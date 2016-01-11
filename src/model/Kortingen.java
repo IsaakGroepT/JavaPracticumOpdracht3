@@ -22,52 +22,25 @@
  * THE SOFTWARE.
  */
 
-package db;
-
-import db.bestand.BestandOpslagStrategy;
-import db.derby.DerbyOpslagStrategy;
-import model.OpslagStrategieen;
+package model;
 
 /**
- * De client voor de opslag strategie
- * 
  * @author Isaak Malik
  */
-public class OpslagManager {
-	private static OpslagStrategy strategy;
+public enum Kortingen {
+	KLEINE_KORTING(5),
+	MEDIUM_KORTING(10),
+	GROTE_KORTING(20);
 	
-	/**
-	 * Singleton constructor
-	 */
-	private OpslagManager(){}
-
-	/**
-	 * Eerst moet de strategy type worden ingesteld
-	 * 
-	 * @param strategieType 
-	 */
-	public static void setStrategy(OpslagStrategieen strategieType)
+	private double kortingPercentage;
+	
+	Kortingen(double percent)
 	{
-		switch (strategieType) {
-			case DATABANK:
-				strategy = new DerbyOpslagStrategy();
-				break;
-			case BESTAND:
-				strategy = new BestandOpslagStrategy();
-				break;
-			case EXCEL:
-				// Nog niks
-				break;
-		}
+		kortingPercentage = percent;
 	}
 	
-	/**
-	 * Zo halen we het object op
-	 * 
-	 * @return 
-	 */
-	public static OpslagStrategy getInstance()
+	public double getPercentage()
 	{
-		return strategy;
+		return kortingPercentage;
 	}
 }
