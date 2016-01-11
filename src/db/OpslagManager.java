@@ -24,34 +24,46 @@
 
 package db;
 
+import db.bestand.BestandOpslagStrategy;
+import db.derby.DerbyOpslagStrategy;
+
 /**
  * De client voor de opslag strategie
  * 
  * @author Isaak Malik
  */
-public class OpslagManager implements OpslagStrategy {
-	private OpslagStrategy strategy;
+public class OpslagManager {
+	private static OpslagStrategy strategy;
+	
+	/**
+	 * Singleton constructor
+	 */
+	private OpslagManager(){}
 
-	public void setStrategy(OpslagStrategy strategy)
+	/**
+	 * Eerst moet de strategy type worden ingesteld
+	 * 
+	 * @param strategyType 
+	 */
+	public static void setStrategy(String strategyType)
 	{
-		this.strategy = strategy;
+		switch (strategyType) {
+			case "db":
+				strategy = new DerbyOpslagStrategy();
+				break;
+			case "txt":
+				strategy = new BestandOpslagStrategy();
+				break;
+		}
 	}
-
-	@Override
-	public void lezen()
+	
+	/**
+	 * Zo halen we het object op
+	 * 
+	 * @return 
+	 */
+	public static OpslagStrategy getInstance()
 	{
-		this.strategy.lezen();
-	}
-
-	@Override
-	public void opslaan()
-	{
-		this.strategy.opslaan();
-	}
-
-	@Override
-	public void close()
-	{
-		this.strategy.close();
+		return strategy;
 	}
 }

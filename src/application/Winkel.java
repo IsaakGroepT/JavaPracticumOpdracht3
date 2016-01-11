@@ -4,6 +4,7 @@ import db.KlantenRegister;
 import db.UitleningenRegister;
 import db.ItemLijst;
 import db.OpslagManager;
+import db.OpslagStrategy;
 import db.bestand.BestandOpslagStrategy;
 import db.derby.DerbyOpslagStrategy;
 import model.Adres;
@@ -15,12 +16,12 @@ import model.Uitlening;
 import view.Main;
 
 public class Winkel {
-	private static OpslagManager db;
+	private static OpslagStrategy db;
 	
 	public static void main(String[] args)
 	{
-		db = new OpslagManager();
-		db.setStrategy(new DerbyOpslagStrategy());
+		OpslagManager.setStrategy("db");
+		db = OpslagManager.getInstance();
 		// Hebben we al opgeslagen gegevens?
 		db.lezen();
 		
