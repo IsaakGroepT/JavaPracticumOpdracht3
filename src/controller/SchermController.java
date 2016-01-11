@@ -30,6 +30,8 @@ import java.util.UUID;
 import db.ItemLijst;
 import db.KlantenRegister;
 import db.UitleningenRegister;
+import java.util.ArrayList;
+import java.util.List;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -54,12 +56,15 @@ import model.Uitlening;
 import model.Exceptions.ItemInputProbleemException;
 import model.Exceptions.KlantInputProbleemException;
 import model.Exceptions.UitleningInputProbleemException;
+import model.ObservableSubject;
+import model.Observer;
 import view.Main;
 
 /**
  * @author Isaak Malik
  */
-public class SchermController {
+public class SchermController implements ObservableSubject {
+	private static List<Observer> observers = new ArrayList();
 	@FXML
 	private TableView<Item> tblItems;
 	@FXML
@@ -242,6 +247,9 @@ public class SchermController {
 						toonInformatieScherm("Er moet een boete betaald worden", 
 								"Het item is " + dagenTeLaat + " dagen te laat. Boete: " + boete);
 					}
+					
+					// Verandering in uitleningen doorgeven aan observers
+					updateObservers();
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
@@ -284,6 +292,9 @@ public class SchermController {
 			cell.getRowValue().setAantalDagen(dagen);
 			try {
 				cell.getRowValue().veranderEindDatum(dagen);
+				
+				// Verandering in uitleningen doorgeven aan observers
+				updateObservers();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -380,6 +391,8 @@ public class SchermController {
 		
 		double prijs = new Uitlening(cbKlantIDs.getValue(), cbItemIDs.getValue(), Integer.parseInt(tfAantalDagen.getText())).getPrijs();
 		
+		// Verandering in uitleningen doorgeven aan observers
+		updateObservers();
 		toonInformatieScherm("Prijs Van De Uitlening", "Deze uitlening kost: " + Double.toString(prijs) + " EUR");
 	}
 	
@@ -395,5 +408,25 @@ public class SchermController {
 		alert.setHeaderText(null);
 		alert.setContentText(text);
 		alert.show();
+	}
+
+	@Override
+	public void registreerObserver(Observer o)
+	{
+		observers.add(o);
+	}
+
+	@Override
+	public void verwijderObserver(Observer o)
+	{
+		observers.remove(o);
+	}
+
+	@Override
+	public void updateObservers()
+	{
+		for (int n = 0; n < observers.size(); n++) {
+			observers.get(n).update();
+		}
 	}
 }

@@ -23,7 +23,9 @@
  */
 package db;
 
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -76,5 +78,12 @@ public class UitleningenRegister {
 	public static void nieuweUitlening(Uitlening uitlening)
 	{
 		uitleningen.add(uitlening);
+	}
+	
+	public static List<Uitlening> getUitleningenVoorKlant(int klantID)
+	{
+		return uitleningen.stream()
+			.filter(p -> p.getKlantID() == klantID)
+			.collect(Collectors.toList());
 	}
 }
